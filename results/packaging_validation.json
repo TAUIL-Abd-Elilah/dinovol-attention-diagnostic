@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "checks": {
+    "cpu_check_passed": true,
+    "source_clean": true,
+    "reference_verified": true,
+    "normalized_pixels_match": true,
+    "checkpoint_model_matches": true,
+    "strict_state_keys_match": true,
+    "real_attention_metadata_matches": true,
+    "backend_flags_match": true,
+    "backend_eligibility_matches": true
+  },
+  "python_ast_checks": 5,
+  "scope": "Public download and portable CPU preflight/first-real-call diagnostic; original timing was not rerun. Source/reference guards added after first-call rerun and checked by final CPU preflight.",
+  "public_script_sha256": {
+    "diagnose_attention.py": "8085f6b87165cebb8719035701f5fc0752fa8dbbb1761fbd042056fce4e5e7ec",
+    "fetch_inputs.py": "e9b08352bacff54efccf1d0cfec1d685ce57086301368c0a43b7a8c01aaa33ab",
+    "load_real_ct.py": "7d1389debd1c541a9a6e5bda5412329fe80c254991760637dbd5546bf54bcb18",
+    "profile_existing.py": "76a641fbb6e25f06b8eb94129e4561de6e0d2c639e32c041ba6e5bbdbacef866",
+    "summarize_trace.py": "a87d5a312ecf13966751bedb6fd1448145683156a788685f3ba63bc7d942a438"
+  },
+  "script_hash_convention": "UTF-8 source normalized to LF line endings"
+}

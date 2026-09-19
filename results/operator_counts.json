@@ -1,0 +1,11 @@
+{
+  "trace_sha256": "87b6e2dd7098305c84e9d7d695fa8ad0ebdd320d0ce0ed9971938218bcb69082",
+  "count_rule": "Complete-duration (ph=X) CPU operator events, exact names",
+  "operator_counts": {
+    "aten::scaled_dot_product_attention": 192,
+    "aten::_scaled_dot_product_attention_math": 192,
+    "aten::_scaled_dot_product_flash_attention": 0,
+    "aten::_scaled_dot_product_efficient_attention": 0,
+    "aten::_scaled_dot_product_cudnn_attention": 0
+  }
+}

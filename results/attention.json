@@ -1,0 +1,127 @@
+{
+  "status": "DIAGNOSED_FIRST_SDPA_ABORTED_BEFORE_ATTENTION",
+  "started_utc": "2026-09-19T23:02:51Z",
+  "attention_executed": false,
+  "sdpa_interceptions": 1,
+  "backend_forcing": false,
+  "diagnostic_warnings": [
+    {
+      "category": "NativeCppWarning",
+      "message": "[W920 00:03:02.000000000 sdp_utils.cpp:923] Warning: Torch was not compiled with flash attention. (function can_use_flash_attention)",
+      "backend": "flash"
+    },
+    {
+      "category": "NativeCppWarning",
+      "message": "[W920 00:03:02.000000000 sdp_utils.cpp:295] Warning: Mem efficient attention requires last dimension of inputs to be divisible by 8. Got Query.size(-1): 54, Key.size(-1): 54, Value.size(-1): 54 instead. (function check_head_dim_size_mem_efficient)",
+      "backend": "efficient"
+    },
+    {
+      "category": "NativeCppWarning",
+      "message": "[W920 00:03:02.000000000 sdp_utils.cpp:653] Warning: head_dim should be a multiple of 8 (function check_cudnn_tensor_shapes)",
+      "backend": "cudnn"
+    }
+  ],
+  "cpu_threads": {
+    "intraop": 2,
+    "interop": 2
+  },
+  "first_sdpa": {
+    "query": {
+      "shape": [
+        1,
+        16,
+        4101,
+        54
+      ],
+      "stride": [
+        3543264,
+        221454,
+        54,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "contiguous": true,
+      "requires_grad": false,
+      "storage_offset": 0
+    },
+    "key": {
+      "shape": [
+        1,
+        16,
+        4101,
+        54
+      ],
+      "stride": [
+        3543264,
+        221454,
+        54,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "contiguous": true,
+      "requires_grad": false,
+      "storage_offset": 0
+    },
+    "value": {
+      "shape": [
+        1,
+        16,
+        4101,
+        54
+      ],
+      "stride": [
+        10629792,
+        54,
+        2592,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "contiguous": false,
+      "requires_grad": false,
+      "storage_offset": 1728
+    },
+    "attn_mask": null,
+    "dropout_p": 0.0,
+    "is_causal": false,
+    "scale": null,
+    "enable_gqa": false,
+    "inference_mode": true,
+    "grad_enabled": false
+  },
+  "backend_flags": {
+    "cuda_built": true,
+    "flash_compiled_available": false,
+    "flash_enabled": true,
+    "efficient_enabled": true,
+    "cudnn_enabled": true,
+    "math_enabled": true,
+    "math_fp16_bf16_reduction_allowed": false,
+    "cudnn_available": true,
+    "cudnn_version": 91002,
+    "device_capability": [
+      8,
+      6
+    ]
+  },
+  "backend_eligibility": {
+    "flash": {
+      "can_use": false
+    },
+    "efficient": {
+      "can_use": false
+    },
+    "cudnn": {
+      "can_use": false
+    }
+  },
+  "gpu_memory_at_stop": {
+    "allocated_bytes": 577142272,
+    "peak_allocated_bytes": 591291392,
+    "reserved_bytes": 637534208
+  },
+  "export_note": "First real SDPA inputs; intercepted before execution. Local paths and unrelated setup fields omitted.",
+  "original_report_sha256": "efb260a9883e6a47041dcfa9d7ff870caa8c8762ebc84492510c9b55c86864ac"
+}

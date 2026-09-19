@@ -1,0 +1,11 @@
+__pycache__/
+inputs/
+outputs/
+verification/
+*.log
+*.pt
+*.pth
+*.npy
+*.tif
+*.tiff
+trace.json

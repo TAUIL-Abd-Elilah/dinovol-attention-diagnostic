@@ -1,0 +1,3 @@
+[W920 00:03:02.000000000 sdp_utils.cpp:923] Warning: Torch was not compiled with flash attention. (function can_use_flash_attention)
+[W920 00:03:02.000000000 sdp_utils.cpp:295] Warning: Mem efficient attention requires last dimension of inputs to be divisible by 8. Got Query.size(-1): 54, Key.size(-1): 54, Value.size(-1): 54 instead. (function check_head_dim_size_mem_efficient)
+[W920 00:03:02.000000000 sdp_utils.cpp:653] Warning: head_dim should be a multiple of 8 (function check_cudnn_tensor_shapes)

@@ -1,23 +1,30 @@
-# September 2026 Progress Prize submission draft
+# What is your contribution?
 
-Contributor: TAUIL Abd Elilah (individual; Discord: Abd Elilah / iluss.)
+I published a [reproducible Dinovol attention diagnostic](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic) that identifies why the official ps8 teacher uses PyTorch's math attention backend on my Windows / RTX 3090 setup, despite all fused-backend flags being enabled.
 
-Contribution: https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic
+## (1) Which scroll data did you work on for this submission?
 
-## What did you contribute?
+I used a fixed 256³ raw-CT crop from **PHerc0139**, at **9.362 µm** resolution, from the public `20250728140407-9.362um-1.2m-113keV-masked.zarr` volume. The model was the published **Paris4-trained ps8 Dinovol teacher, step 352500**, with its reference embedding. This is an execution benchmark on PHerc0139; it does not establish cross-scroll ink-detection accuracy.
 
-A reproducible compatibility diagnosis for the official ps8 Dinovol teacher on Windows and an RTX 3090. The code already uses PyTorch SDPA, but a real-CT profile shows that all 192 attention calls use its math backend in the measured environment. The first real model call explains why: this Torch build lacks Flash Attention, and the other fused backends reject the 54-wide heads. All backend enable flags were already true.
+## (2) How does it substantially increase the probability of yourself or someone else reading those scrolls or others?
 
-The repository includes a fixed public CT input downloader with pixel-hash verification, strict checkpoint loading, profiling and first-call diagnostics, recorded results, and reproduction instructions. It uses PHerc0139 CT with the published Paris4-trained teacher; the test measures execution and does not validate cross-scroll ink accuracy.
+The contribution supports work on making DINO-guided ink experiments more practical on consumer GPUs. It identifies a concrete compatibility issue and provides a measured baseline, allowing contributors to check the backend that actually executes before choosing an optimization.
 
-## How does this help the project?
+The reading benefit is currently indirect: I have not yet demonstrated a speedup, improved ink detection or recovered text. A substantial increase in reading probability therefore remains to be established by follow-up optimization and validation.
 
-It gives contributors a concrete way to distinguish actual backend execution from configuration flags before spending time optimizing Dinovol. It also supplies a measured consumer-GPU baseline for this specific guided-label inference path. This can help reproduce or rule out the same compatibility issue on another installation.
+## (3) What does it enable that was not possible before?
 
-## Evidence and limits
+It packages this specific failure case into a reproducible workflow: download and hash-check the exact public inputs, strictly load the checkpoint, profile the production similarity path, and inspect the first real attention call's backend eligibility. Contributors can reproduce or rule out the same issue on their own installation and compare later changes against the recorded baseline.
 
-On one fixed 256³ cube, five synchronized runs after two warmups gave a median of 3.2967 seconds and peak allocated CUDA memory of 2.855 GiB. Repeated and profiled outputs were exactly equal. The first-call diagnostic records actual Q/K/V shapes and PyTorch's backend rejection reasons.
+The underlying PyTorch profiling tools and Villa SDPA implementation already existed. The new contribution is the verified case, input preparation and reproduction harness; it does not introduce a new reading capability or attention algorithm.
 
-This is a diagnostic contribution, not a speedup, a new attention algorithm, an ink-detection improvement, or a recovered-surface result. It does not establish the bottleneck on Linux/H100 or during training. No award amount is claimed. Existing SDPA work and the original model/data authors are credited in the README.
+## (4) What evidence have you provided for this?
 
-Prepared with AI assistance. Not submitted by the agent; review and paste into the prize form if appropriate.
+- [Trace-derived operator counts](results/operator_counts.json): **192 math-SDPA calls**, covering 24 blocks across eight windows, with the trace hash and extraction rule.
+- [Actual model-input diagnostics](results/attention.json) and [native warnings](results/warnings.txt): bf16 Q/K/V shape `[1,16,4101,54]`; Flash Attention unavailable in this build; memory-efficient and cuDNN attention reject the 54-wide heads.
+- [Recorded measurements](results/baseline.json): two warmups and five synchronized passes; **3.2967 seconds median** per 256³ cube and **2.855 GiB peak allocated CUDA memory**. Repeated and profiled outputs were exactly equal.
+- [Reproduction instructions](README.md), public input downloader, pinned model/source identities, and [portable-package validation](results/packaging_validation.json), including exact pixel identity and strict loading of all 463 checkpoint state keys.
+
+These results cover one input and one environment. Loading, normalization and output-copy time are excluded from the timing; training and Linux/H100 performance were not measured. Original model, data and SDPA authors are credited in the README.
+
+Contributor: TAUIL Abd Elilah (individual; Discord: Abd Elilah / iluss.). Prepared with AI assistance. This Markdown is ready for review and has not been submitted to the prize form.

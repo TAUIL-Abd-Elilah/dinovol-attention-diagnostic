@@ -20,10 +20,10 @@ The underlying PyTorch profiling tools and Villa SDPA implementation already exi
 
 ## (4) What evidence have you provided for this?
 
-- [Trace-derived operator counts](results/operator_counts.json): **192 math-SDPA calls**, covering 24 blocks across eight windows, with the trace hash and extraction rule.
-- [Actual model-input diagnostics](results/attention.json) and [native warnings](results/warnings.txt): bf16 Q/K/V shape `[1,16,4101,54]`; Flash Attention unavailable in this build; memory-efficient and cuDNN attention reject the 54-wide heads.
-- [Recorded measurements](results/baseline.json): two warmups and five synchronized passes; **3.2967 seconds median** per 256³ cube and **2.855 GiB peak allocated CUDA memory**. Repeated and profiled outputs were exactly equal.
-- [Reproduction instructions](README.md), public input downloader, pinned model/source identities, and [portable-package validation](results/packaging_validation.json), including exact pixel identity and strict loading of all 463 checkpoint state keys.
+- [Trace-derived operator counts](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/5409507e8eaaadb92e728f1ef2da47392e3b4404/results/operator_counts.json): **192 math-SDPA calls**, covering 24 blocks across eight windows, with the trace hash and extraction rule.
+- [Actual model-input diagnostics](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/5409507e8eaaadb92e728f1ef2da47392e3b4404/results/attention.json) and [native warnings](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/5409507e8eaaadb92e728f1ef2da47392e3b4404/results/warnings.txt): bf16 Q/K/V shape `[1,16,4101,54]`; Flash Attention unavailable in this build; memory-efficient and cuDNN attention reject the 54-wide heads.
+- [Recorded measurements](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/5409507e8eaaadb92e728f1ef2da47392e3b4404/results/baseline.json): two warmups and five synchronized passes; **3.2967 seconds median** per 256³ cube and **2.855 GiB peak allocated CUDA memory**. Repeated and profiled outputs were exactly equal.
+- [Reproduction instructions](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/5409507e8eaaadb92e728f1ef2da47392e3b4404/README.md), public input downloader, pinned model/source identities, and [portable-package validation](https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/5409507e8eaaadb92e728f1ef2da47392e3b4404/results/packaging_validation.json), including exact pixel identity and strict loading of all 463 checkpoint state keys.
 
 These results cover one input and one environment. Loading, normalization and output-copy time are excluded from the timing; training and Linux/H100 performance were not measured. Original model, data and SDPA authors are credited in the README.
 

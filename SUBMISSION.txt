@@ -1,33 +1,30 @@
-UPDATE TO MY EXISTING DINOVOL ATTENTION DIAGNOSTIC ENTRY
-This extends my existing September entry; it is not a separate submission.
+Discord display name:
+Abd Elilah
 
-(1) Which scroll data did you work on for this submission?
+URL of your open-source / publicly available contribution:
+https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/tree/main/head_padding
+https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/evidence/SUMMARY.json
 
-Three fixed, non-overlapping 256-cubed raw CT inputs from PHerc0139, at 9.362 micrometres, volume 20250728140407-9.362um-1.2m-113keV-masked.zarr. The two additional cubes were selected by coordinates before inference and verified pixel-for-pixel against the official source.
+What is your contribution?
 
-I used the official Paris4-trained Dinovol v2 ps8 teacher, step 352500, SHA256 e041ca870dd2570f8a44d1dd26db1197b3f74121f62023bc774fbc9d40e51a59, and reference embedding SHA256 61bdf93bc5e3fd956eebdbed52618985d27264b8a9e5cb043087d0f234507a81. Reports record every CT hash and pinned Villa source f07d33be6a00d12ace7d6a9465efe17c78ed7b47.
+I turned my earlier Dinovol attention diagnostic into a tested, opt-in optimization: 4.71–5.01 times faster frozen-DINO similarity calculation, with 76.4% lower peak allocated GPU memory on my Windows / RTX 3090 setup. This is a September update to my existing Dinovol entry.
 
-(2) How does it substantially increase the probability of yourself or someone else reading those scrolls or others?
+(1) Which scroll data did you work on?
 
-The follow-up reduces the measured compute and memory cost of DINO similarity experiments on my Windows RTX 3090. Across all three inputs, the complete similarity calculation was 4.708–5.014 times faster, with peak allocated CUDA memory falling from 3.065 GB to 0.722 GB. This can make repeated experiments cheaper and faster. The reading benefit is indirect: improved ink accuracy or recovered text has not been demonstrated.
+Three fixed, non-overlapping 256 x 256 x 256 raw CT cubes from PHerc0139, using the public 9.362-micrometre volume 20250728140407-9.362um-1.2m-113keV-masked.zarr. The two additional cubes were selected by coordinates before inference and verified pixel-for-pixel against the official source. I used the official Paris4-trained Dinovol v2 ps8 teacher, step 352500, and official reference embedding. All input, model and source hashes are published.
+
+(2) How does this increase the probability of reading these or other scrolls?
+
+DINO similarity is a component of the DINO-guided ink workflow. On the three tested cubes, its median runtime fell from 3.71–3.84 seconds to 0.765–0.788 seconds, and peak allocated GPU memory fell from 2.855 GiB to 0.673 GiB. Reducing this cost lets contributors run more similarity experiments with existing consumer hardware. The demonstrated benefit is faster, less memory-intensive computation; improved ink accuracy or recovered text has not yet been demonstrated.
 
 (3) What does it enable that was not possible before?
 
-The earlier entry diagnosed a math-attention fallback. This update provides an explicit, default-off helper that pads 54-wide heads to 56, preserves the original attention scale and restores the original output width. It retains native behavior for unsupported cases and includes an explicit integration example. This applies established head-padding techniques; it is not a new attention algorithm.
+The unmodified teacher fell back to math attention despite fused backends being enabled. The new helper enables PyTorch's existing efficient-attention kernel on this tested setup by padding 54-channel heads to 56, preserving the original attention scale and restoring the original output width. It is disabled by default, retains native behavior outside supported cases, and includes an explicit Villa integration example. The contribution is a tested Dinovol application of established head-padding techniques, not a new attention algorithm.
 
-https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/sdpa_padding.py
-https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/INTEGRATION.md
+(4) What evidence have you provided?
 
-(4) What evidence have you provided for this?
+The public repository includes runnable code, reproducible commands, protocols fixed before the corresponding experiments, verified input hashes, CPU tests, integration checks and three complete frozen-DINO similarity comparisons. Each arm used two warmups and five synchronized timed runs; separate profiler traces confirm 192 math-attention calls replaced by 192 efficient-attention calls. A forced-math padding control on cube A produced exactly equal outputs, isolating the backend change. Timing includes padding and dispatch but excludes startup, CPU normalization/transfers, U-Net prediction and training.
 
-Reproduction instructions, frozen protocols, hashes, CPU guard tests and three full-model comparisons:
-https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/README.md
-https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/evidence/comparison_replica_A.json
-https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/evidence/comparison_replica_B.json
-https://github.com/TAUIL-Abd-Elilah/dinovol-attention-diagnostic/blob/main/head_padding/evidence/comparison_replica_C.json
+The numerical tradeoff is measured: 0.467–0.985% of voxels change their similarity >0.5 eligibility decision. These decisions are not the final ink pseudo-labels. Production-label equivalence and reading accuracy remain untested, and the results cover one scroll and one hardware/software environment. The helper therefore remains experimental and opt-in.
 
-Each profiler records 192 math calls replaced by efficient-attention calls. Timing uses two warmups and five synchronized passes, bf16, eight 128-cubed windows, stride 128, minibatch 1; it excludes startup, CPU transfers, U-Net and training.
-
-Outputs change: similarity > 0.5 eligibility flips on 0.467–0.985% of voxels. These are not production pseudo-labels; production-label equivalence and reading accuracy remain untested. This is one environment and one scroll, not evidence of Linux/H100 or training gains.
-
-Developed and checked with AI assistance; the measured limitations are reported above.
+Developed and checked with AI assistance; code, measurements and limitations are public.

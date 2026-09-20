@@ -1,0 +1,548 @@
+{
+  "status": "PROBE_COMPLETE",
+  "scope": "One real first-block attention call only; no full-forward speedup claim",
+  "variants_predeclared": [
+    "unchanged",
+    "pad56",
+    "pad64",
+    "pad56_math_control"
+  ],
+  "production_source_modified": false,
+  "input": {
+    "shape": [
+      1,
+      16,
+      4101,
+      54
+    ],
+    "dtype": "torch.bfloat16",
+    "q_stride": [
+      3543264,
+      221454,
+      54,
+      1
+    ],
+    "scale_argument": null,
+    "preserved_scale": 0.13608276348795434
+  },
+  "eligibility": {
+    "54": {
+      "flash": false,
+      "efficient": false,
+      "cudnn": false
+    },
+    "56": {
+      "flash": false,
+      "efficient": true,
+      "cudnn": true
+    },
+    "64": {
+      "flash": false,
+      "efficient": true,
+      "cudnn": true
+    }
+  },
+  "variants": {
+    "unchanged": {
+      "status": "PASS",
+      "milliseconds": [
+        15.7653999995091,
+        16.640199995890725,
+        15.973800000210758,
+        15.788000004249625,
+        16.812100002425723
+      ],
+      "median_ms": 15.973800000210758,
+      "output_vs_unchanged": {
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "relative_l2": 0.0,
+        "cosine": 1.0,
+        "exact": true,
+        "finite": true
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_attention_math": 1
+      },
+      "peak_allocated_bytes": 3085083648
+    },
+    "pad56": {
+      "status": "PASS",
+      "milliseconds": [
+        1.724000001559034,
+        1.9535999963409267,
+        1.7930000030901283,
+        1.7718000017339364,
+        1.768800000718329
+      ],
+      "median_ms": 1.7718000017339364,
+      "output_vs_unchanged": {
+        "max_abs": 0.0078125,
+        "mean_abs": 2.5303395887021907e-05,
+        "relative_l2": 0.0007227075984701514,
+        "cosine": 0.9999997019767761,
+        "exact": false,
+        "finite": true
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_efficient_attention": 1
+      },
+      "peak_allocated_bytes": 677127680
+    },
+    "pad64": {
+      "status": "PASS",
+      "milliseconds": [
+        1.5908999994280748,
+        2.1940000005997717,
+        1.629899998079054,
+        1.5754999985801987,
+        1.878899995062966
+      ],
+      "median_ms": 1.629899998079054,
+      "output_vs_unchanged": {
+        "max_abs": 0.0078125,
+        "mean_abs": 2.5303395887021907e-05,
+        "relative_l2": 0.0007227075984701514,
+        "cosine": 0.9999997019767761,
+        "exact": false,
+        "finite": true
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_efficient_attention": 1
+      },
+      "peak_allocated_bytes": 678177280
+    },
+    "pad56_math_control": {
+      "status": "PASS",
+      "milliseconds": [
+        16.98960000067018,
+        16.38259999890579,
+        16.31170000473503,
+        16.821899997012224,
+        16.286500002024695
+      ],
+      "median_ms": 16.38259999890579,
+      "output_vs_unchanged": {
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "relative_l2": 0.0,
+        "cosine": 1.0,
+        "exact": true,
+        "finite": true
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_attention_math": 1
+      },
+      "peak_allocated_bytes": 3108723712
+    }
+  },
+  "provenance": {
+    "source_clean_verified": true,
+    "source_checkout_head": "f07d33be6a00d12ace7d6a9465efe17c78ed7b47",
+    "source": {
+      "vesuvius.ink_detection.training.dynamic_labels": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\training\\dynamic_labels.py",
+        "sha256": "a116fa35a311b3b792b27d3091ffe0fdd0c44e30c4fef574e520ced3a2bf6e83"
+      },
+      "vesuvius.ink_detection.data.normalization": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\data\\normalization.py",
+        "sha256": "640bef67e88d317f89bb294058b802dd55222d6863e1f457a5db16817c70dccd"
+      },
+      "vesuvius.ink_detection.config": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\config.py",
+        "sha256": "3385b50f94e295f0f6706417f2df81177ccb2632dcfec527394a73c0ac5f852e"
+      },
+      "vesuvius.models.build.pretrained_backbones.dinovol_2_builder": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\dinovol_2_builder.py",
+        "sha256": "f68884afa5a154e19418395e0533871819fa8fa50a902813c73eb62ec4b4b073"
+      },
+      "vesuvius.models.build.pretrained_backbones.dinovol_2_eva": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\dinovol_2_eva.py",
+        "sha256": "583510a5412b0abde5f9a20a8e471316ac1cbd7304da5f5bf542bd44c9782152"
+      },
+      "vesuvius.models.build.pretrained_backbones.rope": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\rope.py",
+        "sha256": "bc3853bfb39da4fa01ca714c69d4df3f7f123a90e581cbba77fe4ec9aa18e148"
+      },
+      "driver": {
+        "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\profile_existing.py",
+        "sha256": "76a641fbb6e25f06b8eb94129e4561de6e0d2c639e32c041ba6e5bbdbacef866"
+      },
+      "ct_loader": {
+        "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\load_real_ct.py",
+        "sha256": "7d1389debd1c541a9a6e5bda5412329fe80c254991760637dbd5546bf54bcb18"
+      }
+    },
+    "consumer_method_sha256": "03d70eb13125e319c1fd5ccbfbf035a68aba9a31183b10678aef3c1004611b61",
+    "versions": {
+      "python": "3.14.6 | packaged by conda-forge | (main, Jul 24 2026, 16:16:13) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "torch_cuda": "12.6",
+      "torch": "2.13.0+cu126",
+      "timm": "1.0.22",
+      "numpy": "2.4.6",
+      "tifffile": "2026.7.14",
+      "einops": "0.8.2",
+      "zarr": "3.2.1"
+    },
+    "protocol": {
+      "scope": "frozen DINO similarity only; excludes U-Net, label threshold, student training and dataset sampling",
+      "chunk_size": 256,
+      "window_size": 128,
+      "stride": 128,
+      "patch_size": 8,
+      "embedding_dim": 864,
+      "image_batch": 1,
+      "dino_minibatch": 1,
+      "precision": "bfloat16",
+      "precision_note": "Backbone and input explicitly bf16 as in the consumer; no extra autocast or compilation",
+      "historical_recipe_note": "stride128 preserved; minibatch1 is a declared memory cap versus recipe minibatch16",
+      "normalization": "whole256cube percentile_minmax p1/p99; no geometric or photometric augmentation",
+      "blend_sigma": 4.0,
+      "warmups": 2,
+      "measured_repeats": 5,
+      "profile_passes": 1,
+      "source_model_unchanged": true,
+      "output_transfers_excluded_from_measured_similarity": true,
+      "inference_mode": true
+    },
+    "cuda_allocator": {
+      "configured_fraction": 0.85,
+      "applied": true,
+      "applied_before_checkpoint_load": true
+    },
+    "data": {
+      "volume_path": "<workspace>\\_public\\dinovol-attention-diagnostic\\inputs\\pherc0139_ct.npy",
+      "volume_file_sha256": "aa7e22e50cee6c3a1571122cb5fab13b9b3a349c0ead22fb39736a9312b82cb3",
+      "source": {
+        "uri": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr",
+        "level": 0,
+        "shape": [
+          20974,
+          6621,
+          6621
+        ],
+        "chunks": [
+          128,
+          128,
+          128
+        ],
+        "dtype": "uint8",
+        "voxel_size_um": 9.362
+      },
+      "grid_box_l0_zyx": [
+        3840,
+        4096,
+        3712,
+        3968,
+        1344,
+        1600
+      ],
+      "box_order": "z0,z1,y0,y1,x0,x1",
+      "array_axis_order": "ZYX",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "dtype": "uint8",
+      "array_sha256": "fb5d3659016e1bb760c608336e3ae1f356414464362021ec4e96ce392de94ad5",
+      "nonzero_fraction": 0.9989332556724548,
+      "min": 0,
+      "max": 255,
+      "percentiles_1_50_99": [
+        17.0,
+        98.0,
+        177.0
+      ],
+      "normalized_sha256": "d9ac9eadfb04b0b0a9d7dcb03b835f80a4a729ae185fce26a04bf560ce8768d9"
+    },
+    "input_read_hash_ms": 297.63980000279844,
+    "cpu_normalization_ms": 467.32869999686955,
+    "checkpoint": {
+      "path": "<workspace>\\_research_september_20260919\\dinovol_baseline\\dinovol_v2_ps8_paris4_step352500_teacher_backbone.pt",
+      "sha256": "e041ca870dd2570f8a44d1dd26db1197b3f74121f62023bc774fbc9d40e51a59",
+      "bytes": 863606099,
+      "step": 352500,
+      "config": {
+        "output_dir": "/ephemeral/outputs_v2_shift005_jitter105_r342500_paris4_20260416",
+        "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+        "wandb-entity": "vesuvius-challenge",
+        "wandb-project": "dinov2_pretrain",
+        "wandb_run_id": "model_v2__shift005_jitter105__r342500__paris4__20260416",
+        "wandb_run_name": "model_v2_90k_shift005_jitter105_r342500_paris4_20260416",
+        "resume": true,
+        "auto_resume": false,
+        "wandb_resume": "never",
+        "lr": 2.5e-05,
+        "min_lr": 1e-06,
+        "weight_decay": 0.04,
+        "weight_decay_end": 0.2,
+        "patch_embed_lr_mult": 0.2,
+        "freeze_last_layer_steps": 1250,
+        "momentum_teacher": 0.994,
+        "final_momentum_teacher": 1.0,
+        "warmup_steps": 35000,
+        "warmup_teacher_temp": 0.04,
+        "teacher_temp": 0.07,
+        "warmup_teacher_temp_steps": 25000,
+        "clip_grad": 5.0,
+        "max_iterations": 1000000,
+        "val_every_n": 500,
+        "save_every_n": 2500,
+        "batch_size": 3,
+        "use_amp": true,
+        "centering": "sinkhorn_knopp",
+        "num_local_crops": 8,
+        "prefetch-factor": 6,
+        "dataloader-workers": 14,
+        "persistent_workers": true,
+        "model": {
+          "input_channels": 1,
+          "global_crops_size": [
+            128,
+            128,
+            128
+          ],
+          "local_crops_size": [
+            64,
+            64,
+            64
+          ],
+          "embed_dim": 864,
+          "patch_size": [
+            8,
+            8,
+            8
+          ],
+          "embedding_type": "default",
+          "deeper_embed_patch_chunk_size": null,
+          "deeper_embed_batch_chunk_size": 1,
+          "depth": 24,
+          "num_heads": 16,
+          "qkv_bias": true,
+          "qkv_fused": true,
+          "mlp_ratio": 2.6666666666666665,
+          "swiglu_mlp": true,
+          "scale_mlp": true,
+          "scale_attn_inner": false,
+          "proj_drop_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "drop_path_rate": 0.2,
+          "drop_path_uniform": false,
+          "init_values": null,
+          "use_abs_pos_emb": false,
+          "use_rot_pos_emb": true,
+          "num_reg_tokens": 4,
+          "grad_checkpointing": false,
+          "block_chunks": 0,
+          "rope_type": "mixed",
+          "rope_kwargs": {
+            "base": 100.0,
+            "normalize_coords": "separate",
+            "shift_coords": 0.05,
+            "jitter_coords": 1.05,
+            "rescale_coords": 2.0
+          },
+          "model_type": "v2"
+        },
+        "dataset": {
+          "source_crop_size": [
+            256,
+            256,
+            256
+          ],
+          "local_crop_scale": [
+            0.02,
+            0.25
+          ],
+          "global_crop_size": [
+            128,
+            128,
+            128
+          ],
+          "local_crop_size": [
+            64,
+            64,
+            64
+          ],
+          "num_local_crops": 8,
+          "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+          "datasets": [
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0009B/volumes/20250820154339-2.401um-0.3m-77keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0500P2/volumes/20250526151718-2.215um-0.4m-111keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0814/volumes/20260309142202-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc1299/volumes/20260309130042-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0343P/volumes/20260304131111-2.215um-0.4m-111keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0332/volumes/20251211183505-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20260102150214-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercMAN5/volumes/20260311104824-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc1451/volumes/20260319101107-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercMANB/volumes/20260323091048-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            }
+          ]
+        },
+        "val_dataset": {
+          "source_crop_size": [
+            256,
+            256,
+            256
+          ],
+          "local_crop_scale": [
+            0.02,
+            0.25
+          ],
+          "global_crop_size": [
+            128,
+            128,
+            128
+          ],
+          "local_crop_size": [
+            64,
+            64,
+            64
+          ],
+          "num_local_crops": 8,
+          "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+          "datasets": [
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0332/volumes/20251211183505-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20260102150214-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            }
+          ]
+        },
+        "resume_from": "/ephemeral/outputs_v2_shift005_jitter105/checkpoint_step_342500.pt",
+        "use_ddp": true
+      },
+      "config_sha256": "1c37e878836a528b19644c76afef5689658ba74b0215eb35eeabca85e931a9bd",
+      "model_config": {
+        "input_channels": 1,
+        "global_crops_size": [
+          128,
+          128,
+          128
+        ],
+        "local_crops_size": [
+          64,
+          64,
+          64
+        ],
+        "embed_dim": 864,
+        "patch_size": [
+          8,
+          8,
+          8
+        ],
+        "embedding_type": "default",
+        "deeper_embed_patch_chunk_size": null,
+        "deeper_embed_batch_chunk_size": 1,
+        "depth": 24,
+        "num_heads": 16,
+        "qkv_bias": true,
+        "qkv_fused": true,
+        "mlp_ratio": 2.6666666666666665,
+        "swiglu_mlp": true,
+        "scale_mlp": true,
+        "scale_attn_inner": false,
+        "proj_drop_rate": 0.0,
+        "attn_drop_rate": 0.0,
+        "drop_path_rate": 0.2,
+        "drop_path_uniform": false,
+        "init_values": null,
+        "use_abs_pos_emb": false,
+        "use_rot_pos_emb": true,
+        "num_reg_tokens": 4,
+        "grad_checkpointing": false,
+        "block_chunks": 0,
+        "rope_type": "mixed",
+        "rope_kwargs": {
+          "base": 100.0,
+          "normalize_coords": "separate",
+          "shift_coords": 0.05,
+          "jitter_coords": 1.05,
+          "rescale_coords": 2.0
+        },
+        "model_type": "v2"
+      },
+      "adapter": "strip exactly one backbone. prefix from every teacher key",
+      "strict_key_count": 463,
+      "parameter_count": 215859168
+    },
+    "checkpoint_hash_and_cpu_load_ms": 5683.573100002832,
+    "reference": {
+      "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\inputs\\avg_ref_embedding.npy",
+      "sha256": "61bdf93bc5e3fd956eebdbed52618985d27264b8a9e5cb043087d0f234507a81",
+      "shape": [
+        864
+      ],
+      "norm": 1.0000001192092896,
+      "dtype": "torch.float32",
+      "constructor_device_renormalization": true,
+      "device_norm": 1.0
+    },
+    "reference_verified": true,
+    "host_memory_after_load": {
+      "rss_bytes": 2610151424,
+      "peak_working_set_bytes": 2617782272
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3090",
+      "total_memory": 25769279488,
+      "tf32_matmul": false,
+      "tf32_cudnn": true,
+      "cudnn_benchmark": false,
+      "deterministic_algorithms": false
+    },
+    "backbone_device_transfer_ms": 665.3071999971871,
+    "input_device_transfer_ms": 27.66939999855822,
+    "warmup_ms": []
+  },
+  "script_sha256": "6e3a530eaad6d685c583dfe1e30500fa77fd7e2f4c2e6a4f3b85b5dfd0e6c55e",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "cdaf1f3a9a61e2b3e2410f295c477624491ab1a4c7aba9cdefc43f77efb30d4b"
+}

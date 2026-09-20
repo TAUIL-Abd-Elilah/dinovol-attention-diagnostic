@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "base_commit": "f07d33be6a00d12ace7d6a9465efe17c78ed7b47",
+  "cases": [
+    {
+      "model_type": "v1",
+      "block_chunks": 0,
+      "factory_flag_reached_attention": true,
+      "state_dict_identical": true,
+      "default_and_cpu_opt_in_match_native": true,
+      "training_bypasses_helper": true
+    },
+    {
+      "model_type": "v1",
+      "block_chunks": 1,
+      "factory_flag_reached_attention": true,
+      "state_dict_identical": true,
+      "default_and_cpu_opt_in_match_native": true,
+      "training_bypasses_helper": true
+    },
+    {
+      "model_type": "v2",
+      "block_chunks": 0,
+      "factory_flag_reached_attention": true,
+      "state_dict_identical": true,
+      "default_and_cpu_opt_in_match_native": true,
+      "training_bypasses_helper": true
+    },
+    {
+      "model_type": "v2",
+      "block_chunks": 1,
+      "factory_flag_reached_attention": true,
+      "state_dict_identical": true,
+      "default_and_cpu_opt_in_match_native": true,
+      "training_bypasses_helper": true
+    }
+  ],
+  "cuda_initialized": false,
+  "modified_checkout": false,
+  "torch": "2.13.0+cu126",
+  "cpu_threads": 2,
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "c8207d034146877f21497ab6f9388704225a23dc7c2ccb891ff74860a48f6fb7"
+}

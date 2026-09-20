@@ -1,0 +1,17 @@
+test_actual_sdpa_error_is_not_silently_retried (test_sdpa_padding.DispatchTests.test_actual_sdpa_error_is_not_silently_retried) ... ok
+test_candidate_dispatch_preserves_scale_and_value_width (test_sdpa_padding.DispatchTests.test_candidate_dispatch_preserves_scale_and_value_width) ... ok
+test_compilation_is_native (test_sdpa_padding.DispatchTests.test_compilation_is_native) ... ok
+test_cpu_autograd_remains_native (test_sdpa_padding.DispatchTests.test_cpu_autograd_remains_native) ... ok
+test_disabled_is_native_even_for_unknown_objects (test_sdpa_padding.DispatchTests.test_disabled_is_native_even_for_unknown_objects) ... ok
+test_grad_enabled_is_native (test_sdpa_padding.DispatchTests.test_grad_enabled_is_native) ... ok
+test_no_enabled_backend_and_existing_fused_support_avoid_padding (test_sdpa_padding.DispatchTests.test_no_enabled_backend_and_existing_fused_support_avoid_padding) ... ok
+test_unsupported_candidate_or_query_error_uses_original_tensors (test_sdpa_padding.DispatchTests.test_unsupported_candidate_or_query_error_uses_original_tensors) ... ok
+test_unsupported_cases_keep_original_call (test_sdpa_padding.DispatchTests.test_unsupported_cases_keep_original_call) ... ok
+test_default_scale_regression_is_detectable (test_sdpa_padding.PaddingMathTests.test_default_scale_regression_is_detectable) ... ok
+test_matches_independent_attention_and_preserves_inputs (test_sdpa_padding.PaddingMathTests.test_matches_independent_attention_and_preserves_inputs) ... ok
+test_preserves_causal_boolean_and_additive_masks (test_sdpa_padding.PaddingMathTests.test_preserves_causal_boolean_and_additive_masks) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.513s
+
+OK

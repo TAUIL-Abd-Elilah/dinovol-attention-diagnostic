@@ -1,8 +1,12 @@
 # Dinovol attention compatibility diagnostic
 
+**20 September update:** this project now includes a measured, explicitly opt-in [head-padding implementation](head_padding/README.md). Across three real PHerc0139 cubes on Windows/RTX 3090, complete frozen-DINO similarity was **4.71–5.01× faster**, with **76.4% lower peak allocated GPU memory**. Outputs differ: **0.467–0.985%** of voxels changed their similarity >0.5 eligibility decision. Production labels and reading accuracy remain untested. [Plain-text submission update](SUBMISSION.txt).
+
+The original diagnostic and its reproducible baseline remain below. Its historical timings are separate from the new paired comparison.
+
 The official ps8 Dinovol teacher uses the **math SDPA backend** on the tested Windows / RTX 3090 environment, even though all fused-backend enable flags are true. This report records why, with a reproducible real-CT input and the unchanged Villa model.
 
-This is a diagnostic contribution. **No optimization or speedup is demonstrated.** It does not establish a bottleneck on Linux/H100, model-training performance, ink accuracy, or recovered text.
+The original stage was a diagnostic contribution with no optimization measured at that time. Neither stage establishes a bottleneck on Linux/H100, whole-training performance, ink accuracy, or recovered text.
 
 ## Findings
 

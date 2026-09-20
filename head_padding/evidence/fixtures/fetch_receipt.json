@@ -1,0 +1,19 @@
+{
+  "inputs": [
+    {
+      "name": "pherc0139_z4352",
+      "array_sha256": "819b93a9fa7d3ab30735caea4f8d558f6e83439e9957942b886f1118a0a369f4",
+      "all_chunks_verified_against_source": true
+    },
+    {
+      "name": "pherc0139_z4608",
+      "array_sha256": "8755eceeffffe19ebc89fb1c001aa29a4b7f3c31e5b577714a31297f34268b60",
+      "all_chunks_verified_against_source": true
+    }
+  ],
+  "downloaded_raw_chunks": 16,
+  "downloaded_raw_bytes": 33554432,
+  "downloaded_metadata_bytes": 239,
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "64a43de41fdd001b9024e5e1d13470ae9917e5143a91b26430de1b567f61b295"
+}

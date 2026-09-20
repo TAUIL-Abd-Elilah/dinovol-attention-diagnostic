@@ -1,0 +1,619 @@
+{
+  "status": "PROBE_COMPLETE",
+  "scope": "First actual attention call only; no full-model speed or quality conclusion",
+  "experiment_motivation": {
+    "stage": "New follow-up after full bf16 fused-vs-math comparison",
+    "parent_reported_full_map_max_abs": 0.014,
+    "parent_reported_full_map_mean_abs": 0.00218,
+    "parent_reported_eligibility_flip_fraction": 0.00985,
+    "parent_reported_math_padding_control": "exact",
+    "question": "Can FP32 efficient SDPA reduce error to native bf16 math while retaining useful speed?"
+  },
+  "variants_predeclared": [
+    "native_bf16_math",
+    "pad56_bf16",
+    "pad56_fp32_efficient_cast_bf16"
+  ],
+  "production_source_modified": false,
+  "helper_source_modified": false,
+  "protocol": {
+    "warmups": 2,
+    "measured_repeats": 5,
+    "profiler_passes_per_variant": 1,
+    "padded_width": 56,
+    "original_width": 54,
+    "timing": "Synchronized wall latency including per-call casts, padding, attention, output slicing and output cast",
+    "fixed_order": [
+      "native_bf16_math",
+      "pad56_bf16",
+      "pad56_fp32_efficient_cast_bf16"
+    ],
+    "fp32_variant": "Original bf16 Q/K/V cast to float32 only inside attention, then output cast back to bf16",
+    "backend_forcing": "MATH for reference; automatic for existing bf16 padding; EFFICIENT_ATTENTION only for new FP32 variant"
+  },
+  "input": {
+    "shape": [
+      1,
+      16,
+      4101,
+      54
+    ],
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "strides": {
+      "q": [
+        3543264,
+        221454,
+        54,
+        1
+      ],
+      "k": [
+        3543264,
+        221454,
+        54,
+        1
+      ],
+      "v": [
+        10629792,
+        54,
+        2592,
+        1
+      ]
+    },
+    "scale_argument": null,
+    "preserved_scale": 0.13608276348795434,
+    "qkv_sha256": {
+      "q": "4802a78b41a4682937b291c11ecc1a9329d08394e8d311c66f1082959b659380",
+      "k": "27748ad440cda9e82ebd08d6ccbff1196f0b82956e111460c3c3468ce71d714b",
+      "v": "6688e42735549241035863671947cf76991e8e1e6aabaf478c9f2cfa939e3cfb"
+    }
+  },
+  "precision_settings_unchanged": {
+    "float32_matmul_precision": "highest",
+    "tf32_matmul": false,
+    "tf32_cudnn": true,
+    "bf16_reduced_precision_matmul_reduction": true,
+    "fp16_bf16_reduction_math_sdp_allowed": false,
+    "deterministic_algorithms": false
+  },
+  "backend_flags_before_probe": {
+    "flash": true,
+    "efficient": true,
+    "cudnn": true,
+    "math": true
+  },
+  "eligibility_hints": {
+    "torch.bfloat16": {
+      "flash": false,
+      "efficient": true,
+      "cudnn": true
+    },
+    "torch.float32": {
+      "flash": false,
+      "efficient": true,
+      "cudnn": false
+    }
+  },
+  "reference_output_sha256": "0070fce29699401fab5ab90fcf6e4cbd48538cf4a8e06bb7474ebc1b4fb53de1",
+  "variants": {
+    "native_bf16_math": {
+      "status": "PASS",
+      "milliseconds": [
+        16.482699997141026,
+        16.673499994794838,
+        16.235500006587245,
+        16.955499995674472,
+        16.8852999995579
+      ],
+      "median_ms": 16.673499994794838,
+      "min_ms": 16.235500006587245,
+      "max_ms": 16.955499995674472,
+      "output_vs_native_bf16_math": {
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "relative_l2": 0.0,
+        "cosine": 1.0,
+        "exact_fraction": 0.9999999403953552,
+        "exact": true,
+        "finite": true,
+        "output_dtype": "torch.bfloat16",
+        "output_shape": [
+          1,
+          16,
+          4101,
+          54
+        ]
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_attention_math": 1
+      },
+      "timed_live_allocated_before_bytes": 598402048,
+      "timed_peak_allocated_bytes": 3076983296,
+      "timed_peak_increment_bytes": 2478581248,
+      "trace": "native_bf16_math_trace.json",
+      "top20_self_cuda_operators": "-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \n                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  \n-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \n                                              aten::bmm         0.34%      57.800us         0.44%      74.100us      37.050us       5.088ms        32.02%       5.088ms       2.544ms             2  \n                                ampere_sgemm_128x128_nn         0.00%       0.000us         0.00%       0.000us       0.000us       3.187ms        20.05%       3.187ms       3.187ms             1  \n                                            aten::copy_         0.24%      41.100us         0.81%     137.300us      27.460us       2.787ms        17.54%       2.787ms     557.409us             5  \n                                         aten::_softmax         0.05%       9.000us         0.10%      17.700us      17.700us       2.705ms        17.02%       2.705ms       2.705ms             1  \n_ZN2at6native43_GLOBAL__N__bcfaaeff_10_SoftMax_cu_0a...         0.00%       0.000us         0.00%       0.000us       0.000us       2.705ms        17.02%       2.705ms       2.705ms             1  \n_ZN2at6native29vectorized_elementwise_kernelILi4EZNS...         0.00%       0.000us         0.00%       0.000us       0.000us       2.700ms        16.99%       2.700ms       1.350ms             2  \n                                            aten::where         0.05%       8.600us         0.09%      15.100us      15.100us       2.519ms        15.85%       2.519ms       2.519ms             1  \n_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22g...         0.00%       0.000us         0.00%       0.000us       0.000us       2.519ms        15.85%       2.519ms       2.519ms             1  \n                                         aten::isneginf         0.05%       8.900us         0.09%      16.000us      16.000us       2.366ms        14.89%       2.366ms       2.366ms             1  \n_ZN2at6native29vectorized_elementwise_kernelILi4EZZZ...         0.00%       0.000us         0.00%       0.000us       0.000us       2.366ms        14.89%       2.366ms       2.366ms             1  \n                                ampere_sgemm_128x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us       1.901ms        11.96%       1.901ms       1.901ms             1  \n                                              aten::all         0.08%      12.800us         0.12%      20.200us      20.200us     354.877us         2.23%     354.877us     354.877us             1  \n_ZN2at6native13reduce_kernelILi512ELi1ENS0_8ReduceOp...         0.00%       0.000us         0.00%       0.000us       0.000us     354.877us         2.23%     354.877us     354.877us             1  \n                                              aten::mul         0.18%      31.200us         0.26%      44.500us      22.250us      70.271us         0.44%      70.271us      35.135us             2  \n_ZN2at6native29vectorized_elementwise_kernelILi4ENS0...         0.00%       0.000us         0.00%       0.000us       0.000us      70.271us         0.44%      70.271us      35.135us             2  \n_ZN2at6native27unrolled_elementwise_kernelIZZZNS0_23...         0.00%       0.000us         0.00%       0.000us       0.000us      56.768us         0.36%      56.768us      28.384us             2  \n_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15g...         0.00%       0.000us         0.00%       0.000us       0.000us      30.303us         0.19%      30.303us      30.303us             1  \n                                            aten::fill_         0.03%       4.900us         0.07%      11.200us      11.200us       1.376us         0.01%       1.376us       1.376us             1  \n_ZN2at6native29vectorized_elementwise_kernelILi4ENS0...         0.00%       0.000us         0.00%       0.000us       0.000us       1.376us         0.01%       1.376us       1.376us             1  \n                     aten::scaled_dot_product_attention         0.08%      13.400us         8.38%       1.420ms       1.420ms       0.000us         0.00%      15.892ms      15.892ms             1  \n-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \nSelf CPU time total: 16.954ms\nSelf CUDA time total: 15.892ms\n"
+    },
+    "pad56_bf16": {
+      "status": "PASS",
+      "milliseconds": [
+        1.5658999982406385,
+        1.4680000022053719,
+        2.0678000000771135,
+        1.5371000044979155,
+        1.4666000060969964
+      ],
+      "median_ms": 1.5371000044979155,
+      "min_ms": 1.4666000060969964,
+      "max_ms": 2.0678000000771135,
+      "output_vs_native_bf16_math": {
+        "max_abs": 0.0078125,
+        "mean_abs": 2.5303395887021907e-05,
+        "relative_l2": 0.0007227075984701514,
+        "cosine": 0.9999997019767761,
+        "exact_fraction": 0.9093355536460876,
+        "exact": false,
+        "finite": true,
+        "output_dtype": "torch.bfloat16",
+        "output_shape": [
+          1,
+          16,
+          4101,
+          54
+        ]
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_efficient_attention": 1
+      },
+      "timed_live_allocated_before_bytes": 598402048,
+      "timed_peak_allocated_bytes": 628043264,
+      "timed_peak_increment_bytes": 29641216,
+      "trace": "pad56_bf16_trace.json",
+      "top20_self_cuda_operators": "-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \n                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  \n-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \n                     aten::_efficient_attention_forward         0.52%      12.000us         1.45%      33.400us      33.400us       1.338ms        93.44%       1.338ms       1.338ms             1  \n_Z40fmha_cutlassF_bf16_aligned_64x64_rf_sm80N22PyTor...         0.00%       0.000us         0.00%       0.000us       0.000us       1.338ms        93.44%       1.338ms       1.338ms             1  \n                                            aten::copy_         0.80%      18.500us         1.94%      44.900us      14.967us      66.881us         4.67%      66.881us      22.294us             3  \n_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22g...         0.00%       0.000us         0.00%       0.000us       0.000us      66.881us         4.67%      66.881us      22.294us             3  \n                                            aten::fill_         0.77%      17.800us         2.96%      68.500us      22.833us      27.105us         1.89%      27.105us       9.035us             3  \n_ZN2at6native29vectorized_elementwise_kernelILi4ENS0...         0.00%       0.000us         0.00%       0.000us       0.000us      27.105us         1.89%      27.105us       9.035us             3  \n                                              aten::pad         0.39%       9.000us        41.29%     954.300us     318.100us       0.000us         0.00%      93.986us      31.329us             3  \n                                  aten::constant_pad_nd         0.86%      19.900us        40.90%     945.300us     315.100us       0.000us         0.00%      93.986us      31.329us             3  \n                                            aten::empty         2.02%      46.700us        34.63%     800.500us     114.357us       0.000us         0.00%       0.000us       0.000us             7  \n                                           Unrecognized        32.61%     753.800us        32.61%     753.800us     753.800us       0.000us         0.00%       0.000us       0.000us             1  \n                                       cudaLaunchKernel         3.85%      88.900us         3.85%      88.900us      12.700us       0.000us         0.00%       0.000us       0.000us             7  \n                                           aten::narrow         0.47%      10.800us         0.85%      19.700us       6.567us       0.000us         0.00%       0.000us       0.000us             3  \n                                            aten::slice         0.29%       6.800us         0.46%      10.700us       2.675us       0.000us         0.00%       0.000us       0.000us             4  \n                                       aten::as_strided         0.25%       5.700us         0.25%       5.700us       0.713us       0.000us         0.00%       0.000us       0.000us             8  \n                     aten::scaled_dot_product_attention         0.49%      11.300us         2.58%      59.700us      59.700us       0.000us         0.00%       1.338ms       1.338ms             1  \n          aten::_scaled_dot_product_efficient_attention         0.40%       9.200us         2.09%      48.400us      48.400us       0.000us         0.00%       1.338ms       1.338ms             1  \n                                        aten::transpose         0.17%       4.000us         0.25%       5.800us       1.450us       0.000us         0.00%       0.000us       0.000us             4  \n                                  cudaStreamIsCapturing         0.06%       1.400us         0.06%       1.400us       1.400us       0.000us         0.00%       0.000us       0.000us             1  \n                                  cudaDeviceSynchronize        56.05%       1.296ms        56.05%       1.296ms     647.800us       0.000us         0.00%       0.000us       0.000us             2  \n-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \nSelf CPU time total: 2.311ms\nSelf CUDA time total: 1.432ms\n"
+    },
+    "pad56_fp32_efficient_cast_bf16": {
+      "status": "PASS",
+      "milliseconds": [
+        8.24339999962831,
+        8.88929999928223,
+        8.508400002028793,
+        9.03229999676114,
+        8.494299996527843
+      ],
+      "median_ms": 8.508400002028793,
+      "min_ms": 8.24339999962831,
+      "max_ms": 9.03229999676114,
+      "output_vs_native_bf16_math": {
+        "max_abs": 0.0078125,
+        "mean_abs": 1.2619375411304645e-07,
+        "relative_l2": 6.237577326828614e-05,
+        "cosine": 1.0,
+        "exact_fraction": 0.999720573425293,
+        "exact": false,
+        "finite": true,
+        "output_dtype": "torch.bfloat16",
+        "output_shape": [
+          1,
+          16,
+          4101,
+          54
+        ]
+      },
+      "actual_sdpa_operators": {
+        "aten::scaled_dot_product_attention": 1,
+        "aten::_scaled_dot_product_efficient_attention": 1
+      },
+      "timed_live_allocated_before_bytes": 598402048,
+      "timed_peak_allocated_bytes": 664787456,
+      "timed_peak_increment_bytes": 66385408,
+      "trace": "pad56_fp32_efficient_cast_bf16_trace.json",
+      "top20_self_cuda_operators": "-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \n                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  \n-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \n                     aten::_efficient_attention_forward         0.13%      12.200us         0.32%      31.100us      31.100us       8.687ms        96.87%       8.687ms       8.687ms             1  \n_Z39fmha_cutlassF_f32_aligned_64x64_rf_sm80N22PyTorc...         0.00%       0.000us         0.00%       0.000us       0.000us       8.687ms        96.87%       8.687ms       8.687ms             1  \n                                            aten::copy_         0.42%      40.800us         1.18%     114.200us      16.314us     227.935us         2.54%     227.935us      32.562us             7  \n_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22g...         0.00%       0.000us         0.00%       0.000us       0.000us     113.279us         1.26%     113.279us      37.760us             3  \n_ZN2at6native27unrolled_elementwise_kernelIZZZNS0_23...         0.00%       0.000us         0.00%       0.000us       0.000us      56.864us         0.63%      56.864us      28.432us             2  \n                                            aten::fill_         0.11%      10.400us         0.33%      31.800us      10.600us      52.864us         0.59%      52.864us      17.621us             3  \n_ZN2at6native29vectorized_elementwise_kernelILi4ENS0...         0.00%       0.000us         0.00%       0.000us       0.000us      52.864us         0.59%      52.864us      17.621us             3  \n_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_15g...         0.00%       0.000us         0.00%       0.000us       0.000us      30.080us         0.34%      30.080us      30.080us             1  \n_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22g...         0.00%       0.000us         0.00%       0.000us       0.000us      27.712us         0.31%      27.712us      27.712us             1  \n                                               aten::to         0.06%       6.000us         8.71%     844.100us     211.025us       0.000us         0.00%     114.656us      28.664us             4  \n                                         aten::_to_copy         0.17%      16.900us         8.65%     838.100us     209.525us       0.000us         0.00%     114.656us      28.664us             4  \n                                    aten::empty_strided         0.39%      37.600us         7.65%     741.200us     185.300us       0.000us         0.00%       0.000us       0.000us             4  \n                                           Unrecognized         7.26%     703.600us         7.26%     703.600us     703.600us       0.000us         0.00%       0.000us       0.000us             1  \n                                       cudaLaunchKernel         1.08%     104.500us         1.08%     104.500us       9.500us       0.000us         0.00%       0.000us       0.000us            11  \n                                              aten::pad         0.05%       4.700us         1.14%     110.900us      36.967us       0.000us         0.00%     166.143us      55.381us             3  \n                                  aten::constant_pad_nd         0.13%      13.000us         1.10%     106.200us      35.400us       0.000us         0.00%     166.143us      55.381us             3  \n                                            aten::empty         0.22%      21.800us         0.22%      21.800us       3.114us       0.000us         0.00%       0.000us       0.000us             7  \n                                           aten::narrow         0.06%       5.800us         0.14%      13.200us       4.400us       0.000us         0.00%       0.000us       0.000us             3  \n                                            aten::slice         0.06%       5.800us         0.09%       8.800us       2.200us       0.000us         0.00%       0.000us       0.000us             4  \n                                       aten::as_strided         0.05%       4.600us         0.05%       4.600us       0.575us       0.000us         0.00%       0.000us       0.000us             8  \n-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  \nSelf CPU time total: 9.693ms\nSelf CUDA time total: 8.968ms\n"
+    }
+  },
+  "provenance": {
+    "source_clean_verified": true,
+    "source_checkout_head": "f07d33be6a00d12ace7d6a9465efe17c78ed7b47",
+    "source": {
+      "vesuvius.ink_detection.training.dynamic_labels": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\training\\dynamic_labels.py",
+        "sha256": "a116fa35a311b3b792b27d3091ffe0fdd0c44e30c4fef574e520ced3a2bf6e83"
+      },
+      "vesuvius.ink_detection.data.normalization": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\data\\normalization.py",
+        "sha256": "640bef67e88d317f89bb294058b802dd55222d6863e1f457a5db16817c70dccd"
+      },
+      "vesuvius.ink_detection.config": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\config.py",
+        "sha256": "3385b50f94e295f0f6706417f2df81177ccb2632dcfec527394a73c0ac5f852e"
+      },
+      "vesuvius.models.build.pretrained_backbones.dinovol_2_builder": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\dinovol_2_builder.py",
+        "sha256": "f68884afa5a154e19418395e0533871819fa8fa50a902813c73eb62ec4b4b073"
+      },
+      "vesuvius.models.build.pretrained_backbones.dinovol_2_eva": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\dinovol_2_eva.py",
+        "sha256": "583510a5412b0abde5f9a20a8e471316ac1cbd7304da5f5bf542bd44c9782152"
+      },
+      "vesuvius.models.build.pretrained_backbones.rope": {
+        "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\rope.py",
+        "sha256": "bc3853bfb39da4fa01ca714c69d4df3f7f123a90e581cbba77fe4ec9aa18e148"
+      },
+      "driver": {
+        "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\profile_existing.py",
+        "sha256": "76a641fbb6e25f06b8eb94129e4561de6e0d2c639e32c041ba6e5bbdbacef866"
+      },
+      "ct_loader": {
+        "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\load_real_ct.py",
+        "sha256": "7d1389debd1c541a9a6e5bda5412329fe80c254991760637dbd5546bf54bcb18"
+      }
+    },
+    "consumer_method_sha256": "03d70eb13125e319c1fd5ccbfbf035a68aba9a31183b10678aef3c1004611b61",
+    "versions": {
+      "python": "3.14.6 | packaged by conda-forge | (main, Jul 24 2026, 16:16:13) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "torch_cuda": "12.6",
+      "torch": "2.13.0+cu126",
+      "timm": "1.0.22",
+      "numpy": "2.4.6",
+      "tifffile": "2026.7.14",
+      "einops": "0.8.2",
+      "zarr": "3.2.1"
+    },
+    "protocol": {
+      "scope": "frozen DINO similarity only; excludes U-Net, label threshold, student training and dataset sampling",
+      "chunk_size": 256,
+      "window_size": 128,
+      "stride": 128,
+      "patch_size": 8,
+      "embedding_dim": 864,
+      "image_batch": 1,
+      "dino_minibatch": 1,
+      "precision": "bfloat16",
+      "precision_note": "Backbone and input explicitly bf16 as in the consumer; no extra autocast or compilation",
+      "historical_recipe_note": "stride128 preserved; minibatch1 is a declared memory cap versus recipe minibatch16",
+      "normalization": "whole256cube percentile_minmax p1/p99; no geometric or photometric augmentation",
+      "blend_sigma": 4.0,
+      "warmups": 2,
+      "measured_repeats": 5,
+      "profile_passes": 1,
+      "source_model_unchanged": true,
+      "output_transfers_excluded_from_measured_similarity": true,
+      "inference_mode": true
+    },
+    "cuda_allocator": {
+      "configured_fraction": 0.85,
+      "applied": true,
+      "applied_before_checkpoint_load": true
+    },
+    "data": {
+      "volume_path": "<workspace>\\_public\\dinovol-attention-diagnostic\\inputs\\pherc0139_ct.npy",
+      "volume_file_sha256": "aa7e22e50cee6c3a1571122cb5fab13b9b3a349c0ead22fb39736a9312b82cb3",
+      "source": {
+        "uri": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr",
+        "level": 0,
+        "shape": [
+          20974,
+          6621,
+          6621
+        ],
+        "chunks": [
+          128,
+          128,
+          128
+        ],
+        "dtype": "uint8",
+        "voxel_size_um": 9.362
+      },
+      "grid_box_l0_zyx": [
+        3840,
+        4096,
+        3712,
+        3968,
+        1344,
+        1600
+      ],
+      "box_order": "z0,z1,y0,y1,x0,x1",
+      "array_axis_order": "ZYX",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "dtype": "uint8",
+      "array_sha256": "fb5d3659016e1bb760c608336e3ae1f356414464362021ec4e96ce392de94ad5",
+      "nonzero_fraction": 0.9989332556724548,
+      "min": 0,
+      "max": 255,
+      "percentiles_1_50_99": [
+        17.0,
+        98.0,
+        177.0
+      ],
+      "normalized_sha256": "d9ac9eadfb04b0b0a9d7dcb03b835f80a4a729ae185fce26a04bf560ce8768d9"
+    },
+    "input_read_hash_ms": 176.6782000049716,
+    "cpu_normalization_ms": 260.99560000147903,
+    "checkpoint": {
+      "path": "<workspace>\\_research_september_20260919\\dinovol_baseline\\dinovol_v2_ps8_paris4_step352500_teacher_backbone.pt",
+      "sha256": "e041ca870dd2570f8a44d1dd26db1197b3f74121f62023bc774fbc9d40e51a59",
+      "bytes": 863606099,
+      "step": 352500,
+      "config": {
+        "output_dir": "/ephemeral/outputs_v2_shift005_jitter105_r342500_paris4_20260416",
+        "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+        "wandb-entity": "vesuvius-challenge",
+        "wandb-project": "dinov2_pretrain",
+        "wandb_run_id": "model_v2__shift005_jitter105__r342500__paris4__20260416",
+        "wandb_run_name": "model_v2_90k_shift005_jitter105_r342500_paris4_20260416",
+        "resume": true,
+        "auto_resume": false,
+        "wandb_resume": "never",
+        "lr": 2.5e-05,
+        "min_lr": 1e-06,
+        "weight_decay": 0.04,
+        "weight_decay_end": 0.2,
+        "patch_embed_lr_mult": 0.2,
+        "freeze_last_layer_steps": 1250,
+        "momentum_teacher": 0.994,
+        "final_momentum_teacher": 1.0,
+        "warmup_steps": 35000,
+        "warmup_teacher_temp": 0.04,
+        "teacher_temp": 0.07,
+        "warmup_teacher_temp_steps": 25000,
+        "clip_grad": 5.0,
+        "max_iterations": 1000000,
+        "val_every_n": 500,
+        "save_every_n": 2500,
+        "batch_size": 3,
+        "use_amp": true,
+        "centering": "sinkhorn_knopp",
+        "num_local_crops": 8,
+        "prefetch-factor": 6,
+        "dataloader-workers": 14,
+        "persistent_workers": true,
+        "model": {
+          "input_channels": 1,
+          "global_crops_size": [
+            128,
+            128,
+            128
+          ],
+          "local_crops_size": [
+            64,
+            64,
+            64
+          ],
+          "embed_dim": 864,
+          "patch_size": [
+            8,
+            8,
+            8
+          ],
+          "embedding_type": "default",
+          "deeper_embed_patch_chunk_size": null,
+          "deeper_embed_batch_chunk_size": 1,
+          "depth": 24,
+          "num_heads": 16,
+          "qkv_bias": true,
+          "qkv_fused": true,
+          "mlp_ratio": 2.6666666666666665,
+          "swiglu_mlp": true,
+          "scale_mlp": true,
+          "scale_attn_inner": false,
+          "proj_drop_rate": 0.0,
+          "attn_drop_rate": 0.0,
+          "drop_path_rate": 0.2,
+          "drop_path_uniform": false,
+          "init_values": null,
+          "use_abs_pos_emb": false,
+          "use_rot_pos_emb": true,
+          "num_reg_tokens": 4,
+          "grad_checkpointing": false,
+          "block_chunks": 0,
+          "rope_type": "mixed",
+          "rope_kwargs": {
+            "base": 100.0,
+            "normalize_coords": "separate",
+            "shift_coords": 0.05,
+            "jitter_coords": 1.05,
+            "rescale_coords": 2.0
+          },
+          "model_type": "v2"
+        },
+        "dataset": {
+          "source_crop_size": [
+            256,
+            256,
+            256
+          ],
+          "local_crop_scale": [
+            0.02,
+            0.25
+          ],
+          "global_crop_size": [
+            128,
+            128,
+            128
+          ],
+          "local_crop_size": [
+            64,
+            64,
+            64
+          ],
+          "num_local_crops": 8,
+          "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+          "datasets": [
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0009B/volumes/20250820154339-2.401um-0.3m-77keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0500P2/volumes/20250526151718-2.215um-0.4m-111keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0814/volumes/20260309142202-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc1299/volumes/20260309130042-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0343P/volumes/20260304131111-2.215um-0.4m-111keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0332/volumes/20251211183505-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20260102150214-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercMAN5/volumes/20260311104824-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc1451/volumes/20260319101107-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercMANB/volumes/20260323091048-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            }
+          ]
+        },
+        "val_dataset": {
+          "source_crop_size": [
+            256,
+            256,
+            256
+          ],
+          "local_crop_scale": [
+            0.02,
+            0.25
+          ],
+          "global_crop_size": [
+            128,
+            128,
+            128
+          ],
+          "local_crop_size": [
+            64,
+            64,
+            64
+          ],
+          "num_local_crops": 8,
+          "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+          "datasets": [
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0332/volumes/20251211183505-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20260102150214-2.399um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            },
+            {
+              "volume_path": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+              "volume_scale": 0
+            }
+          ]
+        },
+        "resume_from": "/ephemeral/outputs_v2_shift005_jitter105/checkpoint_step_342500.pt",
+        "use_ddp": true
+      },
+      "config_sha256": "1c37e878836a528b19644c76afef5689658ba74b0215eb35eeabca85e931a9bd",
+      "model_config": {
+        "input_channels": 1,
+        "global_crops_size": [
+          128,
+          128,
+          128
+        ],
+        "local_crops_size": [
+          64,
+          64,
+          64
+        ],
+        "embed_dim": 864,
+        "patch_size": [
+          8,
+          8,
+          8
+        ],
+        "embedding_type": "default",
+        "deeper_embed_patch_chunk_size": null,
+        "deeper_embed_batch_chunk_size": 1,
+        "depth": 24,
+        "num_heads": 16,
+        "qkv_bias": true,
+        "qkv_fused": true,
+        "mlp_ratio": 2.6666666666666665,
+        "swiglu_mlp": true,
+        "scale_mlp": true,
+        "scale_attn_inner": false,
+        "proj_drop_rate": 0.0,
+        "attn_drop_rate": 0.0,
+        "drop_path_rate": 0.2,
+        "drop_path_uniform": false,
+        "init_values": null,
+        "use_abs_pos_emb": false,
+        "use_rot_pos_emb": true,
+        "num_reg_tokens": 4,
+        "grad_checkpointing": false,
+        "block_chunks": 0,
+        "rope_type": "mixed",
+        "rope_kwargs": {
+          "base": 100.0,
+          "normalize_coords": "separate",
+          "shift_coords": 0.05,
+          "jitter_coords": 1.05,
+          "rescale_coords": 2.0
+        },
+        "model_type": "v2"
+      },
+      "adapter": "strip exactly one backbone. prefix from every teacher key",
+      "strict_key_count": 463,
+      "parameter_count": 215859168
+    },
+    "checkpoint_hash_and_cpu_load_ms": 2810.668199999782,
+    "reference": {
+      "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\inputs\\avg_ref_embedding.npy",
+      "sha256": "61bdf93bc5e3fd956eebdbed52618985d27264b8a9e5cb043087d0f234507a81",
+      "shape": [
+        864
+      ],
+      "norm": 1.0000001192092896,
+      "dtype": "torch.float32",
+      "constructor_device_renormalization": true,
+      "device_norm": 1.0
+    },
+    "reference_verified": true,
+    "host_memory_after_load": {
+      "rss_bytes": 2610450432,
+      "peak_working_set_bytes": 2618040320
+    },
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3090",
+      "total_memory": 25769279488,
+      "tf32_matmul": false,
+      "tf32_cudnn": true,
+      "cudnn_benchmark": false,
+      "deterministic_algorithms": false
+    },
+    "backbone_device_transfer_ms": 494.0585000003921,
+    "input_device_transfer_ms": 26.60689999902388,
+    "warmup_ms": []
+  },
+  "script_sha256": "b88c14188defbd3fa6d7154c12bf4def91e08e486c5b7b452b36c8151964d447",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "b8319bf580b2367afe386467abcd36a1b58b1760e10ef9cd967935e1d62b832b"
+}

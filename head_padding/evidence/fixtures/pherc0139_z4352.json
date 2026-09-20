@@ -1,0 +1,153 @@
+{
+  "schema_version": "dinovol-additional-ct-v1",
+  "source_uri": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr",
+  "level": 0,
+  "axis_order": "zyx",
+  "voxel_size_um": 9.362,
+  "bbox_zyx": [
+    4352,
+    4608,
+    3072,
+    3328,
+    2560,
+    2816
+  ],
+  "shape": [
+    256,
+    256,
+    256
+  ],
+  "dtype": "uint8",
+  "array_sha256": "819b93a9fa7d3ab30735caea4f8d558f6e83439e9957942b886f1118a0a369f4",
+  "array_file": "pherc0139_z4352.npy",
+  "array_file_sha256": "f25662219c3958253aa1088f3e138e9ce2a7d77c8534e378f694a65b95a01039",
+  "zarr_metadata_sha256": "562679cffc09a94b7342a38c37e49f433a4dfa6e3c93b7599dbeaec791186a35",
+  "zarr_layout": {
+    "shape": [
+      20974,
+      6621,
+      6621
+    ],
+    "chunks": [
+      128,
+      128,
+      128
+    ],
+    "dtype": "|u1",
+    "order": "C",
+    "compressor": null,
+    "filters": null,
+    "dimension_separator": "/",
+    "zarr_format": 2
+  },
+  "cache_manifest_sha256": "86e47d94f9a98a772645988b3e6a2308bae4867fec0f6eff1467ec4d526d89a8",
+  "all_chunks_verified_against_source": true,
+  "chunks": [
+    {
+      "index_zyx": [
+        34,
+        24,
+        20
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/34/24/20",
+      "cache_file": "cubes_RAW/z04352_y03072_x02560.tif",
+      "cache_file_sha256": "d4bd2dfaf5ee1518560e15ac767b76ea836bf43e0a96a8be92445e5082e73dc3",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "c1f5abe8efbb430a3b90b11c665352e5396bf2be84dab9dc7535cff7c0d6362a"
+    },
+    {
+      "index_zyx": [
+        34,
+        24,
+        21
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/34/24/21",
+      "cache_file": "cubes_RAW/z04352_y03072_x02688.tif",
+      "cache_file_sha256": "57916aa2b6bd8942856cd10fdfb835e3a8e675b6a4ea78d06c2b0f1087b8b3c7",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "24336b065fb3411de511103f8910ae2482b60b64d52a608d2911634c832546b2"
+    },
+    {
+      "index_zyx": [
+        34,
+        25,
+        20
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/34/25/20",
+      "cache_file": "cubes_RAW/z04352_y03200_x02560.tif",
+      "cache_file_sha256": "3a67592d1da343a41e80dc0fe6437cf20015dda744c4723fd1cfa6cae579258e",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "1b5c861312fc8b1d1f0d4d1751c53c42abb53c1970e6a3e5a70542b5e05806e2"
+    },
+    {
+      "index_zyx": [
+        34,
+        25,
+        21
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/34/25/21",
+      "cache_file": "cubes_RAW/z04352_y03200_x02688.tif",
+      "cache_file_sha256": "589ff8ec00b550406db9c759bb6d82d6d3038c7aade96faca70ea296d62d41a4",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "88d26f62e62d5c2c3a73fc423164edb7b928d19fc670769f0f0d99ac9add9a85"
+    },
+    {
+      "index_zyx": [
+        35,
+        24,
+        20
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/35/24/20",
+      "cache_file": "cubes_RAW/z04480_y03072_x02560.tif",
+      "cache_file_sha256": "7b58471f5049c23c75161b9af18968fcf05cedb0123d4f71ac8cf96c18afdaa0",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "e8d3cd8b07013fc28257ae3b90b2a331a1bf33798e9bf0048b036b75a196f7f6"
+    },
+    {
+      "index_zyx": [
+        35,
+        24,
+        21
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/35/24/21",
+      "cache_file": "cubes_RAW/z04480_y03072_x02688.tif",
+      "cache_file_sha256": "4a79bfa9af6adbc6375b97c4ecca6108b9c7129a1978f3f5ce3ae9827419d42b",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "c194d918fd4aa5ab11d7b45d8695651847ba5c3e34516361a72d003f432fc6a6"
+    },
+    {
+      "index_zyx": [
+        35,
+        25,
+        20
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/35/25/20",
+      "cache_file": "cubes_RAW/z04480_y03200_x02560.tif",
+      "cache_file_sha256": "b00ab1eef61084f42bad559109cd1be5e5527b3fda32555f3d1ca9669717db61",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "81409c5fbc5eddaa11f6f3891fa0e69921d4b61da8d8b71a087696d1359f1a92"
+    },
+    {
+      "index_zyx": [
+        35,
+        25,
+        21
+      ],
+      "url": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr/0/35/25/21",
+      "cache_file": "cubes_RAW/z04480_y03200_x02688.tif",
+      "cache_file_sha256": "d2f9d7b4ebd1fb7ea7318e4a2d3eeaf6c184ddaa07c70ac49aea45a3e90b667c",
+      "origin": "cached_tiff",
+      "source_verified": true,
+      "pixel_sha256": "206366c0f0e2b3859d742c0851fa5f0f339a5612aedbe06d6b030b23766e067c"
+    }
+  ],
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "1f8c1813ac417911d564dd5c0cc4be5cd0af88ab4bf31cae71a77dece28feeb5"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "test": "test_unsupported_cases_keep_original_call",
+  "includes_new_nested_tensor_guard": true,
+  "cuda_initialized": false,
+  "helper_sha256": "b87a8ea8e04d22eec144399188d51245e8657ae81ba9081b669791f82f99826d",
+  "test_source_sha256": "e26331121264854ddeff116fd252b9a7f28d19906b948fc7cf064cbabe96cb2a",
+  "log": "test_unsupported_cases_keep_original_call (test_sdpa_padding.DispatchTests.test_unsupported_cases_keep_original_call) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.035s\n\nOK\n",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "a6dfb057a17fa72aef014fbb37c9d4a1d2707ad4e0b5058f87448451475b8cc3"
+}

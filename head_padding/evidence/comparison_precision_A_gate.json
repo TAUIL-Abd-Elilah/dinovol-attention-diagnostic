@@ -1,0 +1,22 @@
+{
+  "status": "FOLLOWUP_SCREEN_PASS",
+  "plan_sha256": "6761d7a20a45f7bf9abb31f132d2265908616f44746da3fb2693a3314b6525e3",
+  "comparison_sha256": "f0d01159d5011943ada1a44e78ac0236730cade036dea038286baaf2a6ce9073",
+  "criteria": {
+    "median_reduction_at_least_20_percent": true,
+    "eligibility_flips_at_most_half_original": true,
+    "all_stages_finite": true,
+    "peak_allocated_not_increased": true
+  },
+  "original_bf16_eligibility_flips": 165329,
+  "followup_eligibility_flips": 71709,
+  "flip_ratio_vs_original": 0.4337351583811673,
+  "flip_reduction_fraction": 0.5662648416188327,
+  "median_speedup": 1.7247135423604845,
+  "median_reduction_fraction": 0.4201935710254957,
+  "original_bf16_final_max_abs": 0.014012128114700317,
+  "followup_final_max_abs": 0.01515612006187439,
+  "caveat": "One-cube research alternative; reduced aggregate eligibility flips, but worst-case map error is higher. No replicated product mode or production-label equivalence.",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "d00f2037caeeb9f53ded0e34905f6957e243137136659e27838e00f7d22303ce"
+}

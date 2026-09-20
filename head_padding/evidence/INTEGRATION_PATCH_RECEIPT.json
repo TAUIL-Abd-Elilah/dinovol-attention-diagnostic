@@ -1,0 +1,13 @@
+{
+  "status": "PATCH_CHECK_AND_AST_PASS",
+  "base_commit": "f07d33be6a00d12ace7d6a9465efe17c78ed7b47",
+  "modified_checkout": false,
+  "patch_sha256": "1904a3e5d2194330929a7d6cb318a2b44b959fc97a7c5e05f891dae1afb08c40",
+  "base_files_sha256": {
+    "vesuvius/src/vesuvius/models/build/pretrained_backbones/dinovol_2_eva.py": "c9b5ed9786ab99a9f89d128ad34aae05eb3acf9676abe7832c6049dade4aacf6",
+    "vesuvius/src/vesuvius/models/build/pretrained_backbones/dinovol_2_builder.py": "e6f220e475226f4b42411b15fe4d13a75b19ef9e2ca98693c26bd66fb029660d"
+  },
+  "helper_sha256": "b87a8ea8e04d22eec144399188d51245e8657ae81ba9081b669791f82f99826d",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "53519418b45faf71239a8046bb73f26756ca23df5ab6afd945c5c11f011fdc4c"
+}

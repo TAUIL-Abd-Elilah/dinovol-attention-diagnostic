@@ -1,0 +1,93 @@
+{
+  "status": "IDENTITY_PASS",
+  "created_utc": "2026-09-20T11:45:53Z",
+  "method": "Streaming SHA256 of complete saved NPY files; no shared_contract call, since raw-pad and helper drivers deliberately differ.",
+  "original_raw_pad56": {
+    "directory": "<workspace>\\_research_september_20260919\\dinovol_head_padding\\full_pad56_01",
+    "report_sha256": "8f9b2da068448af5bb67dd35707e462d5ce02d8e833e46136d0715d3f7d27fdc",
+    "experiment_sha256": "0fa17fc0eb6d51bc1c46887af57e6e85b16e86e5f5859fe6b11bed38373456cb"
+  },
+  "helper": {
+    "directory": "<workspace>\\_research_september_20260919\\dinovol_head_padding\\replica_A_helper",
+    "report_sha256": "a5772a5a6a39cbf85f78381ab78c8578e8a62a98e84f93983010b5186bf768d5",
+    "experiment_sha256": "2dac6f077fd1ef99353eab7126d9ffb64ee45df2bae85bac4c06556c6b42d8c7",
+    "helper": {
+      "sha256": "b87a8ea8e04d22eec144399188d51245e8657ae81ba9081b669791f82f99826d",
+      "path": "<workspace>\\_worktrees\\dinovol-head-padding\\sdpa_padding.py",
+      "integration": "isolated benchmark F proxy preserving saved native callable"
+    }
+  },
+  "array_count": 11,
+  "all_saved_arrays_byte_identical": true,
+  "arrays": [
+    {
+      "file": "window_0_tokens.npy",
+      "original_raw_pad56_sha256": "2b94c90390adfba9a60ed63c9ddd2702d6415b884f7947d0eb9ec0342f0ad15e",
+      "helper_sha256": "2b94c90390adfba9a60ed63c9ddd2702d6415b884f7947d0eb9ec0342f0ad15e",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_1_tokens.npy",
+      "original_raw_pad56_sha256": "800cc08c7afd6918a6197c8f43bc88dceab64ed3d39a09251b90be97bace5965",
+      "helper_sha256": "800cc08c7afd6918a6197c8f43bc88dceab64ed3d39a09251b90be97bace5965",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_2_tokens.npy",
+      "original_raw_pad56_sha256": "f8d70607aa8c4ce62bedbaca6f959762e3b3a569fb69679aadd020232826c407",
+      "helper_sha256": "f8d70607aa8c4ce62bedbaca6f959762e3b3a569fb69679aadd020232826c407",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_3_tokens.npy",
+      "original_raw_pad56_sha256": "538db2e5c6caef5ae206a43713db52eae389f1b8a5f3944ca2e34a64e68ce862",
+      "helper_sha256": "538db2e5c6caef5ae206a43713db52eae389f1b8a5f3944ca2e34a64e68ce862",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_4_tokens.npy",
+      "original_raw_pad56_sha256": "195243877ab35e1be3cfaa9d68064054a3c247757c0efac004c0ca02962a3f9e",
+      "helper_sha256": "195243877ab35e1be3cfaa9d68064054a3c247757c0efac004c0ca02962a3f9e",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_5_tokens.npy",
+      "original_raw_pad56_sha256": "6166ee28df1141b3f2b67136f51f54d9fe1d87ce4c6a1dc1431620ae6f8c1588",
+      "helper_sha256": "6166ee28df1141b3f2b67136f51f54d9fe1d87ce4c6a1dc1431620ae6f8c1588",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_6_tokens.npy",
+      "original_raw_pad56_sha256": "d4f55b5d91af3ae70f01e74f6d2afbb314818dc1a6771caf69f99f598656a5fb",
+      "helper_sha256": "d4f55b5d91af3ae70f01e74f6d2afbb314818dc1a6771caf69f99f598656a5fb",
+      "exact_file_identity": true
+    },
+    {
+      "file": "window_7_tokens.npy",
+      "original_raw_pad56_sha256": "40f854f46d093a50652f262e8cb54cf0ac2706238b478484f55b14a544feb4c1",
+      "helper_sha256": "40f854f46d093a50652f262e8cb54cf0ac2706238b478484f55b14a544feb4c1",
+      "exact_file_identity": true
+    },
+    {
+      "file": "blended_grid.npy",
+      "original_raw_pad56_sha256": "396ce932cff0531d93b4d7fe069f3935dd69a6fbf570d24b6ee610dd32d38988",
+      "helper_sha256": "396ce932cff0531d93b4d7fe069f3935dd69a6fbf570d24b6ee610dd32d38988",
+      "exact_file_identity": true
+    },
+    {
+      "file": "interpolated_before_minmax.npy",
+      "original_raw_pad56_sha256": "90800b687f86553c8d2823ab3b9dff2f1d38dafc743eb671d52af19b6f7d7ec2",
+      "helper_sha256": "90800b687f86553c8d2823ab3b9dff2f1d38dafc743eb671d52af19b6f7d7ec2",
+      "exact_file_identity": true
+    },
+    {
+      "file": "similarity_first.npy",
+      "original_raw_pad56_sha256": "ea99a91d93d035fd7a068f591e39bf61818c08659544f8baf71d58fa3ecce646",
+      "helper_sha256": "ea99a91d93d035fd7a068f591e39bf61818c08659544f8baf71d58fa3ecce646",
+      "exact_file_identity": true
+    }
+  ],
+  "scope": "Confirms helper reproduces original raw-pad56 numerical outputs on cube A; not production pseudo-label equivalence or universal backend equivalence.",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "5cf0db89d55633dd69430eae68a283f16735f9d221f0f4b9680fcae5f9718109"
+}

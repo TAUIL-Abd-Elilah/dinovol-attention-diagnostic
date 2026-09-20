@@ -1,0 +1,369 @@
+{
+  "scope": "Frozen DINO similarity only; one Windows/RTX3090 environment",
+  "label_equivalence": "Untested; similarity >0.5 eligibility is not the production pseudo-label",
+  "replicas": {
+    "A": {
+      "comparison_file": "evidence/comparison_replica_A.json",
+      "comparison_sha256": "a04646f705f58f1c9a009233e7c22e0c972b9b453bf4cb3049ef0bd36de6a828",
+      "input_sha256": "fb5d3659016e1bb760c608336e3ae1f356414464362021ec4e96ce392de94ad5",
+      "native_timing": {
+        "median_ms": 3837.0138999962364,
+        "p90_ms": 3850.264240000979,
+        "windows_per_pass": 8,
+        "tokens_per_pass": 32768
+      },
+      "helper_timing": {
+        "median_ms": 765.289799994207,
+        "p90_ms": 770.9418800004642,
+        "windows_per_pass": 8,
+        "tokens_per_pass": 32768
+      },
+      "performance": {
+        "median_speedup": 5.013805097134813,
+        "median_reduction_fraction": 0.8005506834377228,
+        "p90_ratio": 0.20023090155502368,
+        "peak_allocated_ratio": 0.23567195045732242,
+        "peak_reserved_ratio": 0.28122912491649965,
+        "frozen_performance_screen_pass": true,
+        "scope": "Five timed complete-similarity calls after two warmups; separate fresh processes in fixed order; excludes model startup, CPU transfers, U-Net and training"
+      },
+      "native_memory": {
+        "peak_allocated_bytes": 3065467904,
+        "peak_reserved_bytes": 3139436544
+      },
+      "helper_memory": {
+        "peak_allocated_bytes": 722444800,
+        "peak_reserved_bytes": 882900992
+      },
+      "native_backend": {
+        "aten::scaled_dot_product_attention": 192,
+        "aten::_scaled_dot_product_attention_math": 192,
+        "aten::_scaled_dot_product_flash_attention": 0,
+        "aten::_scaled_dot_product_efficient_attention": 0,
+        "aten::_scaled_dot_product_cudnn_attention": 0
+      },
+      "helper_backend": {
+        "aten::scaled_dot_product_attention": 192,
+        "aten::_scaled_dot_product_attention_math": 0,
+        "aten::_scaled_dot_product_flash_attention": 0,
+        "aten::_scaled_dot_product_efficient_attention": 192,
+        "aten::_scaled_dot_product_cudnn_attention": 0
+      },
+      "final_map_error": {
+        "files": [
+          "similarity_first.npy"
+        ],
+        "element_count": 16777216,
+        "finite": true,
+        "different_elements": 16777191,
+        "exact_equal": false,
+        "max_abs": 0.014012128114700317,
+        "mean_abs": 0.0021792168027173764,
+        "rmse": 0.002373154616934148,
+        "p99_abs": 0.0046457648277282715,
+        "p99_9_abs": 0.005913334190845498,
+        "relative_l2": 0.004556153899465175,
+        "baseline_min": 0.0,
+        "baseline_max": 1.0,
+        "candidate_min": 0.0,
+        "candidate_max": 1.0
+      },
+      "eligibility": {
+        "definition": "strict similarity_first > 0.5; eligibility only, not production pseudo-label",
+        "threshold": 0.5,
+        "voxel_count": 16777216,
+        "baseline_positive": 9126848,
+        "candidate_positive": 9290865,
+        "baseline_exactly_threshold": 0,
+        "candidate_exactly_threshold": 0,
+        "ineligible_to_eligible": 164673,
+        "eligible_to_ineligible": 656,
+        "flipped": 165329,
+        "flipped_fraction_all_voxels": 0.009854376316070557,
+        "baseline_positive_fraction": 0.5440025329589844,
+        "candidate_positive_fraction": 0.5537787079811096,
+        "flips_relative_to_baseline_positive_count": 0.018114578001079892,
+        "flip_margins": {
+          "ineligible_to_eligible": {
+            "baseline_minus_threshold": {
+              "min_signed": -0.009251058101654053,
+              "max_signed": -2.9802322387695312e-08,
+              "mean_signed": -0.0013041066263980948,
+              "median_abs": 0.0011655688285827637,
+              "max_abs": 0.009251058101654053,
+              "p99_abs": 0.003870452642440796
+            },
+            "candidate_minus_threshold": {
+              "min_signed": 5.960464477539063e-08,
+              "max_signed": 0.010268747806549072,
+              "mean_signed": 0.0013002184227819387,
+              "median_abs": 0.0011615157127380371,
+              "max_abs": 0.010268747806549072,
+              "p99_abs": 0.0038901638984680173
+            }
+          },
+          "eligible_to_ineligible": {
+            "baseline_minus_threshold": {
+              "min_signed": 1.3113021850585938e-06,
+              "max_signed": 0.00702589750289917,
+              "mean_signed": 0.0006645711638578554,
+              "median_abs": 0.0004273355007171631,
+              "max_abs": 0.00702589750289917,
+              "p99_abs": 0.003565523028373726
+            },
+            "candidate_minus_threshold": {
+              "min_signed": -0.005334734916687012,
+              "max_signed": -4.470348358154297e-07,
+              "mean_signed": -0.0005994876619519257,
+              "median_abs": 0.00039614737033843994,
+              "max_abs": 0.005334734916687012,
+              "p99_abs": 0.002927653491497047
+            }
+          }
+        }
+      }
+    },
+    "B": {
+      "comparison_file": "evidence/comparison_replica_B.json",
+      "comparison_sha256": "d35341898e2c7a7f8b780d07679fd12f9844c9696f82218e97da699f3fdca3f7",
+      "input_sha256": "819b93a9fa7d3ab30735caea4f8d558f6e83439e9957942b886f1118a0a369f4",
+      "native_timing": {
+        "median_ms": 3724.67759999563,
+        "p90_ms": 3729.39382000186,
+        "windows_per_pass": 8,
+        "tokens_per_pass": 32768
+      },
+      "helper_timing": {
+        "median_ms": 788.1964000043808,
+        "p90_ms": 792.1009599987883,
+        "windows_per_pass": 8,
+        "tokens_per_pass": 32768
+      },
+      "performance": {
+        "median_speedup": 4.725570428861293,
+        "median_reduction_fraction": 0.788385335685079,
+        "p90_ratio": 0.21239402386267514,
+        "peak_allocated_ratio": 0.23567195045732242,
+        "peak_reserved_ratio": 0.28122912491649965,
+        "frozen_performance_screen_pass": true,
+        "scope": "Five timed complete-similarity calls after two warmups; separate fresh processes in fixed order; excludes model startup, CPU transfers, U-Net and training"
+      },
+      "native_memory": {
+        "peak_allocated_bytes": 3065467904,
+        "peak_reserved_bytes": 3139436544
+      },
+      "helper_memory": {
+        "peak_allocated_bytes": 722444800,
+        "peak_reserved_bytes": 882900992
+      },
+      "native_backend": {
+        "aten::scaled_dot_product_attention": 192,
+        "aten::_scaled_dot_product_attention_math": 192,
+        "aten::_scaled_dot_product_flash_attention": 0,
+        "aten::_scaled_dot_product_efficient_attention": 0,
+        "aten::_scaled_dot_product_cudnn_attention": 0
+      },
+      "helper_backend": {
+        "aten::scaled_dot_product_attention": 192,
+        "aten::_scaled_dot_product_attention_math": 0,
+        "aten::_scaled_dot_product_flash_attention": 0,
+        "aten::_scaled_dot_product_efficient_attention": 192,
+        "aten::_scaled_dot_product_cudnn_attention": 0
+      },
+      "final_map_error": {
+        "files": [
+          "similarity_first.npy"
+        ],
+        "element_count": 16777216,
+        "finite": true,
+        "different_elements": 16776986,
+        "exact_equal": false,
+        "max_abs": 0.008592993021011353,
+        "mean_abs": 0.0009968763326008157,
+        "rmse": 0.0012495812534250956,
+        "p99_abs": 0.0033553242683410645,
+        "p99_9_abs": 0.0046721696853637695,
+        "relative_l2": 0.002472899353125457,
+        "baseline_min": 0.0,
+        "baseline_max": 1.0,
+        "candidate_min": 0.0,
+        "candidate_max": 1.0
+      },
+      "eligibility": {
+        "definition": "strict similarity_first > 0.5; eligibility only, not production pseudo-label",
+        "threshold": 0.5,
+        "voxel_count": 16777216,
+        "baseline_positive": 8344327,
+        "candidate_positive": 8289826,
+        "baseline_exactly_threshold": 0,
+        "candidate_exactly_threshold": 7,
+        "ineligible_to_eligible": 11927,
+        "eligible_to_ineligible": 66428,
+        "flipped": 78355,
+        "flipped_fraction_all_voxels": 0.004670321941375732,
+        "baseline_positive_fraction": 0.4973606467247009,
+        "candidate_positive_fraction": 0.49411213397979736,
+        "flips_relative_to_baseline_positive_count": 0.00939021205664639,
+        "flip_margins": {
+          "ineligible_to_eligible": {
+            "baseline_minus_threshold": {
+              "min_signed": -0.00563618540763855,
+              "max_signed": -1.7881393432617188e-07,
+              "mean_signed": -0.0006268286661039486,
+              "median_abs": 0.0004430115222930908,
+              "max_abs": 0.00563618540763855,
+              "p99_abs": 0.002892524003982544
+            },
+            "candidate_minus_threshold": {
+              "min_signed": 5.960464477539063e-08,
+              "max_signed": 0.006286799907684326,
+              "mean_signed": 0.0006282604319397417,
+              "median_abs": 0.0004521012306213379,
+              "max_abs": 0.006286799907684326,
+              "p99_abs": 0.0028809607028961177
+            }
+          },
+          "eligible_to_ineligible": {
+            "baseline_minus_threshold": {
+              "min_signed": 5.960464477539063e-08,
+              "max_signed": 0.007960498332977295,
+              "mean_signed": 0.000784381826587047,
+              "median_abs": 0.0006127059459686279,
+              "max_abs": 0.007960498332977295,
+              "p99_abs": 0.0030179619789123535
+            },
+            "candidate_minus_threshold": {
+              "min_signed": -0.007937699556350708,
+              "max_signed": 0.0,
+              "mean_signed": -0.0007863663477477573,
+              "median_abs": 0.0006206929683685303,
+              "max_abs": 0.007937699556350708,
+              "p99_abs": 0.0030237060785293533
+            }
+          }
+        }
+      }
+    },
+    "C": {
+      "comparison_file": "evidence/comparison_replica_C.json",
+      "comparison_sha256": "620eac8813dc33b445ec1a863d157b7a83d0df688d4f8063f2a0052ce1733e6f",
+      "input_sha256": "8755eceeffffe19ebc89fb1c001aa29a4b7f3c31e5b577714a31297f34268b60",
+      "native_timing": {
+        "median_ms": 3711.872499996389,
+        "p90_ms": 3727.7369000017643,
+        "windows_per_pass": 8,
+        "tokens_per_pass": 32768
+      },
+      "helper_timing": {
+        "median_ms": 788.4086999983992,
+        "p90_ms": 790.7084600010421,
+        "windows_per_pass": 8,
+        "tokens_per_pass": 32768
+      },
+      "performance": {
+        "median_speedup": 4.7080562403787845,
+        "median_reduction_fraction": 0.7875981192782979,
+        "p90_ratio": 0.21211487860118772,
+        "peak_allocated_ratio": 0.23567195045732242,
+        "peak_reserved_ratio": 0.28122912491649965,
+        "frozen_performance_screen_pass": true,
+        "scope": "Five timed complete-similarity calls after two warmups; separate fresh processes in fixed order; excludes model startup, CPU transfers, U-Net and training"
+      },
+      "native_memory": {
+        "peak_allocated_bytes": 3065467904,
+        "peak_reserved_bytes": 3139436544
+      },
+      "helper_memory": {
+        "peak_allocated_bytes": 722444800,
+        "peak_reserved_bytes": 882900992
+      },
+      "native_backend": {
+        "aten::scaled_dot_product_attention": 192,
+        "aten::_scaled_dot_product_attention_math": 192,
+        "aten::_scaled_dot_product_flash_attention": 0,
+        "aten::_scaled_dot_product_efficient_attention": 0,
+        "aten::_scaled_dot_product_cudnn_attention": 0
+      },
+      "helper_backend": {
+        "aten::scaled_dot_product_attention": 192,
+        "aten::_scaled_dot_product_attention_math": 0,
+        "aten::_scaled_dot_product_flash_attention": 0,
+        "aten::_scaled_dot_product_efficient_attention": 192,
+        "aten::_scaled_dot_product_cudnn_attention": 0
+      },
+      "final_map_error": {
+        "files": [
+          "similarity_first.npy"
+        ],
+        "element_count": 16777216,
+        "finite": true,
+        "different_elements": 16777130,
+        "exact_equal": false,
+        "max_abs": 0.010042935609817505,
+        "mean_abs": 0.0014563747929297183,
+        "rmse": 0.001683310681840813,
+        "p99_abs": 0.003851175308227539,
+        "p99_9_abs": 0.00519031286239624,
+        "relative_l2": 0.003454038723778574,
+        "baseline_min": 0.0,
+        "baseline_max": 1.0,
+        "candidate_min": 0.0,
+        "candidate_max": 1.0
+      },
+      "eligibility": {
+        "definition": "strict similarity_first > 0.5; eligibility only, not production pseudo-label",
+        "threshold": 0.5,
+        "voxel_count": 16777216,
+        "baseline_positive": 6727566,
+        "candidate_positive": 6835625,
+        "baseline_exactly_threshold": 0,
+        "candidate_exactly_threshold": 6,
+        "ineligible_to_eligible": 111102,
+        "eligible_to_ineligible": 3043,
+        "flipped": 114145,
+        "flipped_fraction_all_voxels": 0.006803572177886963,
+        "baseline_positive_fraction": 0.4009941816329956,
+        "candidate_positive_fraction": 0.40743499994277954,
+        "flips_relative_to_baseline_positive_count": 0.016966760340961354,
+        "flip_margins": {
+          "ineligible_to_eligible": {
+            "baseline_minus_threshold": {
+              "min_signed": -0.006958752870559692,
+              "max_signed": -2.9802322387695312e-08,
+              "mean_signed": -0.0009908898333052859,
+              "median_abs": 0.0008353888988494873,
+              "max_abs": 0.006958752870559692,
+              "p99_abs": 0.003383035063743594
+            },
+            "candidate_minus_threshold": {
+              "min_signed": 5.960464477539063e-08,
+              "max_signed": 0.008062660694122314,
+              "mean_signed": 0.0009920868945957396,
+              "median_abs": 0.0008414387702941895,
+              "max_abs": 0.008062660694122314,
+              "p99_abs": 0.003375346660614016
+            }
+          },
+          "eligible_to_ineligible": {
+            "baseline_minus_threshold": {
+              "min_signed": 5.960464477539063e-08,
+              "max_signed": 0.0056955814361572266,
+              "mean_signed": 0.0005606912955460563,
+              "median_abs": 0.0003905296325683594,
+              "max_abs": 0.0056955814361572266,
+              "p99_abs": 0.0026717734336853026
+            },
+            "candidate_minus_threshold": {
+              "min_signed": -0.004182189702987671,
+              "max_signed": 0.0,
+              "mean_signed": -0.0005697608875515349,
+              "median_abs": 0.0004114806652069092,
+              "max_abs": 0.004182189702987671,
+              "p99_abs": 0.002526071071624755
+            }
+          }
+        }
+      }
+    }
+  }
+}

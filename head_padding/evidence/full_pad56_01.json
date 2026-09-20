@@ -1,0 +1,623 @@
+{
+  "status": "FULL_EXPERIMENT_COMPLETE",
+  "mode": "pad56",
+  "production_source_modified": false,
+  "quality_capture": "Last eight windows and eighth interpolation only, during separate profiler pass; excluded from timing",
+  "started_utc": "2026-09-20T11:37:37Z",
+  "source_clean_verified": true,
+  "source_checkout_head": "f07d33be6a00d12ace7d6a9465efe17c78ed7b47",
+  "source": {
+    "vesuvius.ink_detection.training.dynamic_labels": {
+      "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\training\\dynamic_labels.py",
+      "sha256": "a116fa35a311b3b792b27d3091ffe0fdd0c44e30c4fef574e520ced3a2bf6e83"
+    },
+    "vesuvius.ink_detection.data.normalization": {
+      "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\data\\normalization.py",
+      "sha256": "640bef67e88d317f89bb294058b802dd55222d6863e1f457a5db16817c70dccd"
+    },
+    "vesuvius.ink_detection.config": {
+      "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\ink_detection\\config.py",
+      "sha256": "3385b50f94e295f0f6706417f2df81177ccb2632dcfec527394a73c0ac5f852e"
+    },
+    "vesuvius.models.build.pretrained_backbones.dinovol_2_builder": {
+      "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\dinovol_2_builder.py",
+      "sha256": "f68884afa5a154e19418395e0533871819fa8fa50a902813c73eb62ec4b4b073"
+    },
+    "vesuvius.models.build.pretrained_backbones.dinovol_2_eva": {
+      "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\dinovol_2_eva.py",
+      "sha256": "583510a5412b0abde5f9a20a8e471316ac1cbd7304da5f5bf542bd44c9782152"
+    },
+    "vesuvius.models.build.pretrained_backbones.rope": {
+      "path": "<workspace>\\_worktrees\\villa-dinovol-padding-probe\\vesuvius\\src\\vesuvius\\models\\build\\pretrained_backbones\\rope.py",
+      "sha256": "bc3853bfb39da4fa01ca714c69d4df3f7f123a90e581cbba77fe4ec9aa18e148"
+    },
+    "driver": {
+      "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\profile_existing.py",
+      "sha256": "76a641fbb6e25f06b8eb94129e4561de6e0d2c639e32c041ba6e5bbdbacef866"
+    },
+    "ct_loader": {
+      "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\load_real_ct.py",
+      "sha256": "7d1389debd1c541a9a6e5bda5412329fe80c254991760637dbd5546bf54bcb18"
+    }
+  },
+  "consumer_method_sha256": "03d70eb13125e319c1fd5ccbfbf035a68aba9a31183b10678aef3c1004611b61",
+  "versions": {
+    "python": "3.14.6 | packaged by conda-forge | (main, Jul 24 2026, 16:16:13) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch_cuda": "12.6",
+    "torch": "2.13.0+cu126",
+    "timm": "1.0.22",
+    "numpy": "2.4.6",
+    "tifffile": "2026.7.14",
+    "einops": "0.8.2",
+    "zarr": "3.2.1"
+  },
+  "protocol": {
+    "scope": "frozen DINO similarity only; excludes U-Net, label threshold, student training and dataset sampling",
+    "chunk_size": 256,
+    "window_size": 128,
+    "stride": 128,
+    "patch_size": 8,
+    "embedding_dim": 864,
+    "image_batch": 1,
+    "dino_minibatch": 1,
+    "precision": "bfloat16",
+    "precision_note": "Backbone and input explicitly bf16 as in the consumer; no extra autocast or compilation",
+    "historical_recipe_note": "stride128 preserved; minibatch1 is a declared memory cap versus recipe minibatch16",
+    "normalization": "whole256cube percentile_minmax p1/p99; no geometric or photometric augmentation",
+    "blend_sigma": 4.0,
+    "warmups": 2,
+    "measured_repeats": 5,
+    "profile_passes": 1,
+    "source_model_unchanged": true,
+    "output_transfers_excluded_from_measured_similarity": true,
+    "inference_mode": true
+  },
+  "cuda_allocator": {
+    "configured_fraction": 0.85,
+    "applied": true,
+    "applied_before_checkpoint_load": true
+  },
+  "data": {
+    "volume_path": "<workspace>\\_public\\dinovol-attention-diagnostic\\inputs\\pherc0139_ct.npy",
+    "volume_file_sha256": "aa7e22e50cee6c3a1571122cb5fab13b9b3a349c0ead22fb39736a9312b82cb3",
+    "source": {
+      "uri": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20250728140407-9.362um-1.2m-113keV-masked.zarr",
+      "level": 0,
+      "shape": [
+        20974,
+        6621,
+        6621
+      ],
+      "chunks": [
+        128,
+        128,
+        128
+      ],
+      "dtype": "uint8",
+      "voxel_size_um": 9.362
+    },
+    "grid_box_l0_zyx": [
+      3840,
+      4096,
+      3712,
+      3968,
+      1344,
+      1600
+    ],
+    "box_order": "z0,z1,y0,y1,x0,x1",
+    "array_axis_order": "ZYX",
+    "shape": [
+      256,
+      256,
+      256
+    ],
+    "dtype": "uint8",
+    "array_sha256": "fb5d3659016e1bb760c608336e3ae1f356414464362021ec4e96ce392de94ad5",
+    "nonzero_fraction": 0.9989332556724548,
+    "min": 0,
+    "max": 255,
+    "percentiles_1_50_99": [
+      17.0,
+      98.0,
+      177.0
+    ],
+    "normalized_sha256": "d9ac9eadfb04b0b0a9d7dcb03b835f80a4a729ae185fce26a04bf560ce8768d9"
+  },
+  "input_read_hash_ms": 182.01609999960056,
+  "cpu_normalization_ms": 266.794299997855,
+  "checkpoint": {
+    "path": "<workspace>\\_research_september_20260919\\dinovol_baseline\\dinovol_v2_ps8_paris4_step352500_teacher_backbone.pt",
+    "sha256": "e041ca870dd2570f8a44d1dd26db1197b3f74121f62023bc774fbc9d40e51a59",
+    "bytes": 863606099,
+    "step": 352500,
+    "config": {
+      "output_dir": "/ephemeral/outputs_v2_shift005_jitter105_r342500_paris4_20260416",
+      "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+      "wandb-entity": "vesuvius-challenge",
+      "wandb-project": "dinov2_pretrain",
+      "wandb_run_id": "model_v2__shift005_jitter105__r342500__paris4__20260416",
+      "wandb_run_name": "model_v2_90k_shift005_jitter105_r342500_paris4_20260416",
+      "resume": true,
+      "auto_resume": false,
+      "wandb_resume": "never",
+      "lr": 2.5e-05,
+      "min_lr": 1e-06,
+      "weight_decay": 0.04,
+      "weight_decay_end": 0.2,
+      "patch_embed_lr_mult": 0.2,
+      "freeze_last_layer_steps": 1250,
+      "momentum_teacher": 0.994,
+      "final_momentum_teacher": 1.0,
+      "warmup_steps": 35000,
+      "warmup_teacher_temp": 0.04,
+      "teacher_temp": 0.07,
+      "warmup_teacher_temp_steps": 25000,
+      "clip_grad": 5.0,
+      "max_iterations": 1000000,
+      "val_every_n": 500,
+      "save_every_n": 2500,
+      "batch_size": 3,
+      "use_amp": true,
+      "centering": "sinkhorn_knopp",
+      "num_local_crops": 8,
+      "prefetch-factor": 6,
+      "dataloader-workers": 14,
+      "persistent_workers": true,
+      "model": {
+        "input_channels": 1,
+        "global_crops_size": [
+          128,
+          128,
+          128
+        ],
+        "local_crops_size": [
+          64,
+          64,
+          64
+        ],
+        "embed_dim": 864,
+        "patch_size": [
+          8,
+          8,
+          8
+        ],
+        "embedding_type": "default",
+        "deeper_embed_patch_chunk_size": null,
+        "deeper_embed_batch_chunk_size": 1,
+        "depth": 24,
+        "num_heads": 16,
+        "qkv_bias": true,
+        "qkv_fused": true,
+        "mlp_ratio": 2.6666666666666665,
+        "swiglu_mlp": true,
+        "scale_mlp": true,
+        "scale_attn_inner": false,
+        "proj_drop_rate": 0.0,
+        "attn_drop_rate": 0.0,
+        "drop_path_rate": 0.2,
+        "drop_path_uniform": false,
+        "init_values": null,
+        "use_abs_pos_emb": false,
+        "use_rot_pos_emb": true,
+        "num_reg_tokens": 4,
+        "grad_checkpointing": false,
+        "block_chunks": 0,
+        "rope_type": "mixed",
+        "rope_kwargs": {
+          "base": 100.0,
+          "normalize_coords": "separate",
+          "shift_coords": 0.05,
+          "jitter_coords": 1.05,
+          "rescale_coords": 2.0
+        },
+        "model_type": "v2"
+      },
+      "dataset": {
+        "source_crop_size": [
+          256,
+          256,
+          256
+        ],
+        "local_crop_scale": [
+          0.02,
+          0.25
+        ],
+        "global_crop_size": [
+          128,
+          128,
+          128
+        ],
+        "local_crop_size": [
+          64,
+          64,
+          64
+        ],
+        "num_local_crops": 8,
+        "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+        "datasets": [
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0009B/volumes/20250820154339-2.401um-0.3m-77keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0500P2/volumes/20250526151718-2.215um-0.4m-111keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0814/volumes/20260309142202-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc1299/volumes/20260309130042-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0343P/volumes/20260304131111-2.215um-0.4m-111keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0332/volumes/20251211183505-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20260102150214-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHercMAN5/volumes/20260311104824-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc1451/volumes/20260319101107-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHercMANB/volumes/20260323091048-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          }
+        ]
+      },
+      "val_dataset": {
+        "source_crop_size": [
+          256,
+          256,
+          256
+        ],
+        "local_crop_scale": [
+          0.02,
+          0.25
+        ],
+        "global_crop_size": [
+          128,
+          128,
+          128
+        ],
+        "local_crop_size": [
+          64,
+          64,
+          64
+        ],
+        "num_local_crops": 8,
+        "volume_auth": "/home/ubuntu/dino_pretraining/dinovol/creds.json",
+        "datasets": [
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0332/volumes/20251211183505-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHerc0139/volumes/20260102150214-2.399um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          },
+          {
+            "volume_path": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+            "volume_scale": 0
+          }
+        ]
+      },
+      "resume_from": "/ephemeral/outputs_v2_shift005_jitter105/checkpoint_step_342500.pt",
+      "use_ddp": true
+    },
+    "config_sha256": "1c37e878836a528b19644c76afef5689658ba74b0215eb35eeabca85e931a9bd",
+    "model_config": {
+      "input_channels": 1,
+      "global_crops_size": [
+        128,
+        128,
+        128
+      ],
+      "local_crops_size": [
+        64,
+        64,
+        64
+      ],
+      "embed_dim": 864,
+      "patch_size": [
+        8,
+        8,
+        8
+      ],
+      "embedding_type": "default",
+      "deeper_embed_patch_chunk_size": null,
+      "deeper_embed_batch_chunk_size": 1,
+      "depth": 24,
+      "num_heads": 16,
+      "qkv_bias": true,
+      "qkv_fused": true,
+      "mlp_ratio": 2.6666666666666665,
+      "swiglu_mlp": true,
+      "scale_mlp": true,
+      "scale_attn_inner": false,
+      "proj_drop_rate": 0.0,
+      "attn_drop_rate": 0.0,
+      "drop_path_rate": 0.2,
+      "drop_path_uniform": false,
+      "init_values": null,
+      "use_abs_pos_emb": false,
+      "use_rot_pos_emb": true,
+      "num_reg_tokens": 4,
+      "grad_checkpointing": false,
+      "block_chunks": 0,
+      "rope_type": "mixed",
+      "rope_kwargs": {
+        "base": 100.0,
+        "normalize_coords": "separate",
+        "shift_coords": 0.05,
+        "jitter_coords": 1.05,
+        "rescale_coords": 2.0
+      },
+      "model_type": "v2"
+    },
+    "adapter": "strip exactly one backbone. prefix from every teacher key",
+    "strict_key_count": 463,
+    "parameter_count": 215859168
+  },
+  "checkpoint_hash_and_cpu_load_ms": 2847.159899996768,
+  "reference": {
+    "path": "<workspace>\\_public\\dinovol-attention-diagnostic\\inputs\\avg_ref_embedding.npy",
+    "sha256": "61bdf93bc5e3fd956eebdbed52618985d27264b8a9e5cb043087d0f234507a81",
+    "shape": [
+      864
+    ],
+    "norm": 1.0000001192092896,
+    "dtype": "torch.float32",
+    "constructor_device_renormalization": true,
+    "device_norm": 1.0
+  },
+  "reference_verified": true,
+  "host_memory_after_load": {
+    "rss_bytes": 2609061888,
+    "peak_working_set_bytes": 2616680448
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 3090",
+    "total_memory": 25769279488,
+    "tf32_matmul": false,
+    "tf32_cudnn": true,
+    "cudnn_benchmark": false,
+    "deterministic_algorithms": false
+  },
+  "backbone_device_transfer_ms": 490.9345000050962,
+  "input_device_transfer_ms": 26.243300002533942,
+  "warmup_ms": [
+    981.8510000040988,
+    787.7615000033984
+  ],
+  "measured_ms": [
+    786.7320000004838,
+    786.0248000069987,
+    785.9994000027655,
+    787.6923000003444,
+    787.1401000011247
+  ],
+  "repeat_errors": [
+    {
+      "repeat": 0,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_equal": true
+    },
+    {
+      "repeat": 1,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_equal": true
+    },
+    {
+      "repeat": 2,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_equal": true
+    },
+    {
+      "repeat": 3,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_equal": true
+    },
+    {
+      "repeat": 4,
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_equal": true
+    }
+  ],
+  "output": {
+    "path": "<workspace>\\_research_september_20260919\\dinovol_head_padding\\full_pad56_01\\similarity_first.npy",
+    "sha256": "ea99a91d93d035fd7a068f591e39bf61818c08659544f8baf71d58fa3ecce646",
+    "shape": [
+      1,
+      1,
+      256,
+      256,
+      256
+    ],
+    "dtype": "float32",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.5141557455062866
+  },
+  "timing_summary": {
+    "median_ms": 786.7320000004838,
+    "p90_ms": 787.4714200006565,
+    "windows_per_pass": 8,
+    "tokens_per_pass": 32768
+  },
+  "gpu_memory_timed": {
+    "peak_allocated_bytes": 722444800,
+    "peak_reserved_bytes": 882900992
+  },
+  "pre_minmax": {
+    "min": 0.03138040006160736,
+    "max": 0.47689229249954224,
+    "range": 0.4455118775367737
+  },
+  "profile_output_error": {
+    "max_abs": 0.0,
+    "mean_abs": 0.0
+  },
+  "top20_self_cuda_operators": [
+    {
+      "name": "production_dino_similarity",
+      "count": 1,
+      "self_cuda_us": 1081912.808,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "production_backbone.forward_features",
+      "count": 8,
+      "self_cuda_us": 858573.946,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "aten::_efficient_attention_forward",
+      "count": 192,
+      "self_cuda_us": 293420.3729999991,
+      "self_cpu_us": 3063.7000000001462
+    },
+    {
+      "name": "_Z40fmha_cutlassF_bf16_aligned_64x64_rf_sm80N22PyTorchMemEffAttention15AttentionKernelIN7cutlass10bfloat16_tENS1_4arch4Sm80ELb1ELi64ELi64ELi64ELb1ELb1EE6ParamsE",
+      "count": 192,
+      "self_cuda_us": 293420.3729999991,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "aten::addmm",
+      "count": 960,
+      "self_cuda_us": 275165.8239999983,
+      "self_cpu_us": 18113.100000000966
+    },
+    {
+      "name": "_ZN7cutlass7Kernel2I68cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8EEvNT_6ParamsE",
+      "count": 576,
+      "self_cuda_us": 195922.96399999852,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "aten::copy_",
+      "count": 1018,
+      "self_cuda_us": 133204.2409999994,
+      "self_cpu_us": 5894.7000000010485
+    },
+    {
+      "name": "Memcpy DtoH (Device -> Pageable)",
+      "count": 10,
+      "self_cuda_us": 110164.98399999982,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+      "count": 192,
+      "self_cuda_us": 52786.52800000011,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "aten::mul",
+      "count": 1352,
+      "self_cuda_us": 35419.21000000034,
+      "self_cpu_us": 10651.500000001564
+    },
+    {
+      "name": "aten::cat",
+      "count": 1361,
+      "self_cuda_us": 35125.01500000089,
+      "self_cpu_us": 11576.49999999841
+    },
+    {
+      "name": "_ZN2at6native40_GLOBAL__N__27eda9f4_8_Shape_cu_85d9f36c19CatArrayBatchedCopyINS1_10OpaqueTypeILj2EEEjLi4ELi64ELi64EEEvPT_NS1_25CatArrInputTensorMetadataIS5_T0_XT2_EXT3_EEENS1_16TensorSizeStrideIS8_Lj4EEEiS8_",
+      "count": 960,
+      "self_cuda_us": 34366.97600000056,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "aten::add",
+      "count": 960,
+      "self_cuda_us": 27420.254000000023,
+      "self_cpu_us": 7294.5000000007
+    },
+    {
+      "name": "ampere_bf16_s1688gemm_bf16_128x256_ldg8_relu_f2f_stages_32x1_tn",
+      "count": 192,
+      "self_cuda_us": 26223.95299999922,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "aten::native_layer_norm",
+      "count": 584,
+      "self_cuda_us": 23831.01899999871,
+      "self_cpu_us": 8551.900000002584
+    },
+    {
+      "name": "_ZN2at6native53_GLOBAL__N__e58679f9_20_layer_norm_kernel_cu_3ff0b71f28vectorized_layer_norm_kernelIN3c108BFloat16EfLb0EEEviT0_PKT_S8_S8_PS5_S9_PS6_",
+      "count": 584,
+      "self_cuda_us": 23831.01899999871,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_13BinaryFunctorIN3c108BFloat16ES4_S4_NS0_15binary_internal10MulFunctorIfEEEESt5arrayIPcLy3EEEEviT0_T1_",
+      "count": 576,
+      "self_cuda_us": 23091.84900000064,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22gpu_kernel_impl_nocastIZZZNS0_23direct_copy_kernel_cudaERNS_18TensorIteratorBaseEENKUlvE1_clEvENKUlvE10_clEvEUlN3c108BFloat16EE_EEvS4_RKT_EUliE_EEviT1_",
+      "count": 976,
+      "self_cuda_us": 22579.390999999538,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_15CUDAFunctor_addIN3c108BFloat16EEESt5arrayIPcLy3EEEEviT0_T1_",
+      "count": 384,
+      "self_cuda_us": 16647.67299999971,
+      "self_cpu_us": 0.0
+    },
+    {
+      "name": "_ZN2at6native18elementwise_kernelILi128ELi4EZNS0_22gpu_kernel_impl_nocastINS0_13BinaryFunctorIN3c108BFloat16ES5_S5_NS0_15binary_internal10MulFunctorIfEEEEEEvRNS_18TensorIteratorBaseERKT_EUliE_EEviT1_",
+      "count": 384,
+      "self_cuda_us": 11141.36200000011,
+      "self_cpu_us": 0.0
+    }
+  ],
+  "gpu_memory_profile": {
+    "peak_allocated_bytes": 722444800,
+    "peak_reserved_bytes": 882900992
+  },
+  "host_memory_final": {
+    "rss_bytes": 2520743936,
+    "peak_working_set_bytes": 2701090816
+  },
+  "counts": {
+    "sdpa": 1536,
+    "windows": 64,
+    "map_interpolations": 8,
+    "captured_windows": 8
+  },
+  "finished_utc": "2026-09-20T11:38:00Z",
+  "experiment_sha256": "0fa17fc0eb6d51bc1c46887af57e6e85b16e86e5f5859fe6b11bed38373456cb",
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "8f9b2da068448af5bb67dd35707e462d5ce02d8e833e46136d0715d3f7d27fdc"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "tests_run": 12,
+  "errors": 0,
+  "failures": 0,
+  "python": "3.14.6 | packaged by conda-forge | (main, Jul 24 2026, 16:16:13) [MSC v.1944 64 bit (AMD64)]",
+  "torch": "2.13.0+cu126",
+  "num_threads": 2,
+  "cuda_initialized_before": false,
+  "cuda_initialized_after": false,
+  "ast": "PASS",
+  "source_sha256": {
+    "sdpa_padding.py": "2fc1aeecedd46c23987de5141f5663ad83d2b1061c9f70318c6e6d57d8f0afe3",
+    "test_sdpa_padding.py": "55a3a4059ea33cdd5bfebfcc962e2fbd16f5a98d937e82e6694a615b262ae2b9"
+  },
+  "publication_note": "Only workspace prefixes redacted; local original hash retained below.",
+  "unredacted_file_sha256": "39a3aa2a9081a9d8e8c0fad4755e478d2ccd25c893f327f3fb05054d14b054f3"
+}

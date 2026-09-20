@@ -1,0 +1,9 @@
+# Separate precision follow-up
+
+Motivation, recorded before full precision-follow-up runs: the first bf16 fused full-cube result changed 0.9854% of similarity >0.5 eligibility decisions. Its forced-math padding control was exact. A subsequent actual first-call probe found FP32 efficient attention followed by bf16 output casting much closer to native bf16 math, with 99.9721% of attention outputs exactly equal, while remaining faster than math. This is a follow-up hypothesis, not a change to the earlier frozen protocol.
+
+Run cube A only, FP32-in-attention first, then unchanged baseline, in fresh processes with identical profile_precision.py. Keep all model projections, inputs, output dtype, reference, normalization, windowing and captures unchanged. Cast Q/K/V to FP32 only after their original bf16 computation; pad54→56, retain original54**-0.5 scale; force efficient attention in this diagnostic and cast result back to bf16. Include every cast/pad in latency. Backend forcing is diagnostic only, not a product default.
+
+Use two warmups, five synchronized timings, separate profiler/captures. Report all stage errors and strict0.5 eligibility changes. A useful follow-up must reduce complete-similarity time at least20% versus its paired baseline and halve the original bf16 candidate's eligibility flips (165329), while keeping finite outputs and no larger peak allocated memory. These numerical criteria prioritize development; they do not establish production-label equivalence, ink quality, or a scientifically justified tolerance.
+
+No other cubes or product precision option are implied by a first positive result. If the screen fails, publish the follow-up as negative evidence; retain the separately validated opt-in bf16 helper and its disclosed output differences. If it passes, report it as a one-cube research alternative, requiring replication before a broad claim.
